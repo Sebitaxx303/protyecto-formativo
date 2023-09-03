@@ -1,12 +1,106 @@
 import Navbarinic from "../components/NavbarInicio"
+import { useForm } from "react-hook-form"
+import { useAuth } from "../context/AuthContext"
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 const Inicio = () =>{
+  const { register, handleSubmit, formState:{errors} } = useForm()
+  const {signup,  isAuthenticathed, errors: RegisterErrors } = useAuth();
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(isAuthenticathed) navigate('/taller-inicio');
+  },[isAuthenticathed, navigate])
+  const onSubmitedReg = handleSubmit( async (values) => {
+    signup(values);
+
+    })
     return(
         <>
         {/* NAV BAR PRINCIPAL DE INICIO */}
           <Navbarinic/>
           {/*ABRE iNFONAV*/} 
           <header className="header justify-items-center">
+                            {/*ABRE MODAL DE REGSITRO DE TALLER*/} 
+                            <div className="modal fade" id="modalRegistroTaller" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-scrollable">
+                                  <div className="modal-content" style={{border: 'Solid'}}>
+                                    <div className="modal-header">
+                                      <h1 className="modal-title fs-5"  id="exampleModalLabel">Iniciar sesión</h1>
+                                      <button type="button" className="btn-close"   data-bs-dismiss="modal" aria-label="Close"></ button>
+                                    </div>
+                                    <div className="modal-body">
+                                    {
+                                      RegisterErrors.map((error, i)=> (
+                                        <div className='bg-danger' key={i}>
+                                          {error}
+                                          </div>
+                                      ))
+                                    }
+                                      <form onSubmit={onSubmitedReg }>    
+                                      
+                                      <div className="mb-3">
+                                          <label>Tipo de usuario</label>
+                                          <select className="form-control" {...register("user_type", {required: true})} placeholder="ingrese su tipo de usuario">
+                                            <option>taller</option>
+                                            <option>empresa</option>
+                                          </select>
+                                        </div>
+                                          {
+                                            errors.user_type && <p className='text-danger'>El tipo de usuario es obligatorio</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">Nombre de la entidad</label>
+                                            <input type="text" className="form-control" {...register("company_name", {required: true})} aria-describedby="emailHelp"placeholder="ingrese el nombre del taller" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.company_name && <p className='text-danger'>El nombre de la entidad es obligatorio</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">RUT</label>
+                                            <input type="number" className="form-control" {...register("rut", {required: true})} autoComplete="off" placeholder="ingrese el RUT de su taller"/>
+                                          </div>        
+                                          {
+                                            errors.rut && <p className='text-danger'>El RUT es obligatorio</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">direccion</label>
+                                            <input type="text" className="form-control" {...register("u_address", {required: true})} aria-describedby="emailHelp"placeholder="ingrese ela direccion" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.u_address && <p className='text-danger'>La dirección es obligatoria</p>
+                                          }
+                                          <div className="mb-3">
+                                              <label htmlFor="exampleInputPassword1" className="form-label">Numero de telefono</label>
+                                              <input type="number" className="form-control" {...register("phone_number", {required: true})} autoComplete="off" placeholder="ingrese su numero telefonico"/>
+                                          </div> 
+                                        
+                                          <div className="mb-3">
+                                            <label htmlFor="exampleInputPassword1" className="form-label">Correo</label>
+                                            <input type="email" className="form-control" {...register("email", {required: true})} autoComplete="off" placeholder="ingrese su correo"/>
+                                          </div>        
+                                          {
+                                            errors.email && <p className='text-danger'>El correo electronico es obligatorio</p>
+                                          }       
+                                          <div className="mb-3">
+                                            <label htmlFor="exampleInputPassword1" className="form-label">contraseña</label>
+                                            <input type="password" className="form-control" {...register("u_password", {required: true})} autoComplete="off" placeholder="ingrese su contraseña"/>
+                                          </div>        
+                                          {
+                                            errors.u_password && <p className='text-danger'>La contraseña es obligatoria</p>
+                                          }    
+                                          <button type="submit"  className="btn text-light" style={{backgroundColor: '#C23373'}}>Registrate</button>
+                                      </form> 
+                                    </div>
+                                    <div className="modal-footer justify-content-center">
+                                      <div className="d-grid gap-2 d-md-block">
+                                        <button className="btn btn-danger btn-sm"  data-bs-target="#segundamodal" aria-label="close"  data-bs-toggle="modal">Volver</ button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div> 
+                            {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
               <nav className="nav d-flex justify-content-center top-none" style={{backgroundColor: "#C23373"}}>
                   <a href="#Tituloservicios">contacto</a>
                   <a href="#Tituloservicios">Servicios</a>

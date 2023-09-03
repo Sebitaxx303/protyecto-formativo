@@ -84,11 +84,14 @@ export const VerifyToken = async (req,res) => {
         
         const id = user._id
         const pool = await getConnection();
-        const results = await pool.request()
+        const results = await pool
+        .request()
         .input('id',sql.Int, id)
         .query(userQueries.profile)
         if(!results) return res.status(401).json({message: 'No estas autorizado'})
 
-        return res.json(results.recordsets)
+        return res.json(
+            results.recordsets
+        )
     })
 }

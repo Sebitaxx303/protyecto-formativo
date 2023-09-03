@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, RegisterRequest, VerifyTokenRequest } from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest } from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -11,7 +11,7 @@ export const useAuth = () => {
         throw new Error("useAuth must be used within an AuthProvider");
     }
     return context;
-};
+}
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     const signup = async (user)=> {
         try {
             const res = await RegisterRequest (user)
-            console.log(res)
+            setIsAuthenticathed(true);
             setUser(res.data);
         } catch (error) {
             setErrors(error.response.data)
@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
     const signin = async (user) => {
         try {
             const res = await LoginRequest(user);
-            console.log(res.data);
             setIsAuthenticathed(true);
             setUser(res.data)
         } catch (error) {
@@ -43,6 +42,15 @@ export const AuthProvider = ({ children }) => {
                 setErrors(error.data.message)
             }
             setErrors([error.response.data.message]);
+        }
+    }
+
+    const logout = async () => {
+        try {
+            await LogoutRequest();
+            setIsAuthenticathed(false)
+        } catch (error) {
+            console.log(error)
         }
     }
     useEffect(() => {
@@ -59,6 +67,7 @@ export const AuthProvider = ({ children }) => {
             const cookies = Cookies.get();
             if(!cookies.token){
                 setIsAuthenticathed(false)
+                setLoading(false)
                 return(setUser(null))
             }
             try {
@@ -83,6 +92,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             signup,
             signin,
+            logout,
             user, 
             isAuthenticathed,
             errors,

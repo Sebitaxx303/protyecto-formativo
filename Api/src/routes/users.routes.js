@@ -14,7 +14,7 @@ const router = new Router();
 router.post('/register', validatorSchema(registerSchema), register)
 router.post('/login', validatorSchema(loginSchema) ,login)
 router.post('/logout', logout)
-router.get('/verify', VerifyToken)
+router.get('/verify', requiredAuth, VerifyToken)
 router.get('/profile', requiredAuth, profile)
 
 

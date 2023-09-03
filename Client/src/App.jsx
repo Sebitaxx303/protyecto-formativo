@@ -14,7 +14,6 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Inicio/>}/>
 
-
             <Route element={<ProtectedRoute/>}>
                 <Route path='/taller-inicio' element={<InicioTaller/>}/>
             </Route>

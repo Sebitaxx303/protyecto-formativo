@@ -395,19 +395,21 @@ width: 100%;
 .conte::-webkit-scrollbar-track {
   border-radius: 10px;  
 }
+#menu{
+  justify-content: end;
+}
 #menu ul{
   list-style: none;
   margin: 0%;
   padding: 0%;
+  width: 100%;
 }
 #menu ul li{
-  background-color: azure;
- 
-  
+  background-color: #79155B;
 }
 #menu ul a{
   display: block;
-  color: black;
+  color: #f1f2f3;
   text-decoration: none;
   font-weight: 400;
   height: 75px;
@@ -420,7 +422,7 @@ width: 100%;
 #menu ul li {
   position:relative;
   float:left;
-  width: 250px;
+  width: 200px;
   margin:0;
   padding:0;
   margin-left: px;
@@ -438,7 +440,7 @@ width: 100%;
  }
 #menu ul ul li {
   float:none;
-  width: 250px;
+  width: 200px;
  }
 #menu ul ul a {
 line-height:120%;
@@ -447,4 +449,10 @@ padding:10px 15px;
 #menu ul li:hover > ul {
   display:block;
  }
+ #menu{
+
+ }
+@media screen and (max-width:400px) {
+  
+}
  

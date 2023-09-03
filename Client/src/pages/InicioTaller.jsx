@@ -1,7 +1,10 @@
+import NavbarTaller from "../components/NavbarTaller"
 
 const InicioTaller = () => {
   return (
         <>
+        <NavbarTaller/>
+        
             <div className="container">
             <div className="container-fluid rounded-bottom-5 position-relative text-center p-3 border-top-0" style={{height:'auto', backgroundColor: '#79155B', border: '2px solid black'}}>
             
