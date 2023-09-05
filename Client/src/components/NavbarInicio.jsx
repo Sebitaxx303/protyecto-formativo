@@ -53,33 +53,32 @@ const Navbarinic = () =>{
                                     <div className="modal-body">
                                       {
                                          SigninErrors.map((error, i)=> (
-                                           <div className='bg-danger text-light' key={i}>
+                                           <div className='bg-danger text-light rounded text-center' key={i}>
                                              {error}
                                              </div>
                                          ))
                                       }
                                       <form onSubmit={onSubmitedLog}>
 
-                                        <div className="input-box">                                         
+                                          {
+                                            errors.email && <p className='text-danger'>El email es obligatorio</p>
+                                          }  
+                                        <div className="input-box">                                       
                                           <span className="icon"><i className="bi bi-envelope-fill"></i><ion-icon name="mail"></ion-icon>
                                           </span>
                                           <input type="email" {...register("email", {required: true})}/>
                                           <label htmlFor="Email">Email</label>
-                                            {
-                                              errors.email && <p className='text-danger'>Email is required </p>
-                                            }
                                         </div>
-
+                                          {
+                                              errors.u_password && <p className='text-danger'>La contraseña es obligatoria</p>
+                                          }
                                         <div className="input-box">
                                           <span className="icon"><ion-icon  name="lock-closed"><i className="bi  bi-key-fill"></i></ion-icon></span>
                                           <input type="password" {...register("u_password", {required: true})} />
-                                          <label  htmlFor="password">Contraseña</label>
-                                          {
-                                              errors.u_password && <p className='text-danger'>password is required </p>
-                                          }
+                                          <label htmlFor="password">Contraseña</label>
                                         </div>
 
-                                        <button type="submit" className="btn text-light"  style={{backgroundColor: '#C23373', width: '100%'}}>Entrar</button>
+                                        <button type="submit" className="btn text-light" data-bs-dismiss="modal" aria-label="Close"  style={{backgroundColor: '#C23373', width: '100%'}}>Entrar</button>
                                       </form>
                                     </div>
                                     <div className="modal-footer justify-content-center">

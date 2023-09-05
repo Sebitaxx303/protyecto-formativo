@@ -42,12 +42,12 @@ export const login = async (req,res) => {
 
         let emailFound = results.recordsets[0]
         emailFound = emailFound[0].email
-        if(emailFound != email) return res.status(400).json({ message: 'user not found'})
+        if(emailFound != email) return res.status(400).json({ message: 'El usuario no fue encontrado'})
 
         let passwordFound =  results.recordsets[0]
         passwordFound = passwordFound[0].u_password
         const passMatch = await bcrypt.compare(u_password, passwordFound);
-        if(!passMatch)return res.status(400).json({ message: 'Error in cedentials'})
+        if(!passMatch)return res.status(400).json({ message: 'Error en las crendeciales'})
 
         let id = results.recordsets[0]
         id = id[0].id
@@ -67,12 +67,15 @@ export const logout = (req,res) => {
 
 export const profile = async (req,res) => {
     let id = req.user._id
-    const pool = await getConnection()
-    const results = await pool.request()
-    .input('id', id)
-    .query(userQueries.profile)
-    res.json(results)
-
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .input('id', id)
+        .query(userQueries.profile)
+        res.json(results)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export const VerifyToken = async (req,res) => {
@@ -94,4 +97,19 @@ export const VerifyToken = async (req,res) => {
             results.recordsets
         )
     })
+}
+
+export const name = async (req,res) => {
+    const id = req.user._id
+    
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .input('id', id)
+        .query(userQueries.user_name)
+        res.json(results)
+    } catch (error) {
+        console.log(error)
+    }
+
 }

@@ -3,8 +3,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import Inicio from './pages/Inicio'
 import { AuthProvider } from './context/AuthContext'
-import InicioTaller from './pages/InicioTaller'
+import InicioTaller from './pages/TallerInicio'
 import ProtectedRoute from './protectedRoute'
+import PerfilTaller from './pages/TallerPerfil'
+import TallerMaquinas from './pages/TallerMaquinas'
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
 
             <Route element={<ProtectedRoute/>}>
                 <Route path='/taller-inicio' element={<InicioTaller/>}/>
+                <Route path='/taller-perfil' element={<PerfilTaller/>}/>
+                <Route path='/taller-maquinas' element={<TallerMaquinas/>}/>
             </Route>
 
         </Routes>

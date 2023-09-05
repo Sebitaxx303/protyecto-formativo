@@ -4,6 +4,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser'
 import usersRoutes from './routes/users.routes.js'
+import machinesRoutes from './routes/machines.routes.js'
+import requestsRoutes from './routes/requests.routes.js'
 
 const app = express();
 
@@ -27,7 +29,9 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended:false}));
 
 //RUTAS
+app.use("/api", requestsRoutes)
 app.use("/api", usersRoutes)
+app.use("/api", machinesRoutes)
 
 
 export default app

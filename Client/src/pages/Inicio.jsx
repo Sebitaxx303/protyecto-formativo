@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
 const Inicio = () =>{
-  const { register, handleSubmit, formState:{errors} } = useForm()
+  const { register, handleSubmit, formState:{errors} } = useForm();
   const {signup,  isAuthenticathed, errors: RegisterErrors } = useAuth();
   const navigate = useNavigate();
   useEffect(()=>{
@@ -17,12 +17,10 @@ const Inicio = () =>{
     })
     return(
         <>
-        {/* NAV BAR PRINCIPAL DE INICIO */}
+          {/* NAV BAR PRINCIPAL DE INICIO */}
           <Navbarinic/>
-          {/*ABRE iNFONAV*/} 
-          <header className="header justify-items-center">
-                            {/*ABRE MODAL DE REGSITRO DE TALLER*/} 
-                            <div className="modal fade" id="modalRegistroTaller" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+          {/*ABRE MODAL DE REGSITRO DE TALLER*/} 
+          <div className="modal fade" id="modalRegistroTaller" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-scrollable">
                                   <div className="modal-content" style={{border: 'Solid'}}>
                                     <div className="modal-header">
@@ -41,7 +39,7 @@ const Inicio = () =>{
                                       
                                       <div className="mb-3">
                                           <label>Tipo de usuario</label>
-                                          <select className="form-control" {...register("user_type", {required: true})} placeholder="ingrese su tipo de usuario">
+                                          <select className="form-control" {...register("user_type", {required: true})} placeholder="Ingrese su tipo de usuario">
                                             <option>taller</option>
                                             <option>empresa</option>
                                           </select>
@@ -51,40 +49,40 @@ const Inicio = () =>{
                                           }
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">Nombre de la entidad</label>
-                                            <input type="text" className="form-control" {...register("company_name", {required: true})} aria-describedby="emailHelp"placeholder="ingrese el nombre del taller" autoComplete="off"/>
+                                            <input type="text" className="form-control" {...register("company_name", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese el nombre de la entidad" autoComplete="off"/>
                                           </div>        
                                           {
                                             errors.company_name && <p className='text-danger'>El nombre de la entidad es obligatorio</p>
                                           }
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">RUT</label>
-                                            <input type="number" className="form-control" {...register("rut", {required: true})} autoComplete="off" placeholder="ingrese el RUT de su taller"/>
+                                            <input type="number" className="form-control" {...register("rut", {required: true})} autoComplete="off" placeholder="Ingrese el RUT de la entidad"/>
                                           </div>        
                                           {
                                             errors.rut && <p className='text-danger'>El RUT es obligatorio</p>
                                           }
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">direccion</label>
-                                            <input type="text" className="form-control" {...register("u_address", {required: true})} aria-describedby="emailHelp"placeholder="ingrese ela direccion" autoComplete="off"/>
+                                            <input type="text" className="form-control" {...register("u_address", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese la direccion de la entidad" autoComplete="off"/>
                                           </div>        
                                           {
                                             errors.u_address && <p className='text-danger'>La dirección es obligatoria</p>
                                           }
                                           <div className="mb-3">
                                               <label htmlFor="exampleInputPassword1" className="form-label">Numero de telefono</label>
-                                              <input type="number" className="form-control" {...register("phone_number", {required: true})} autoComplete="off" placeholder="ingrese su numero telefonico"/>
+                                              <input type="number" className="form-control" {...register("phone_number", {required: true})} autoComplete="off" placeholder="Ingrese su número telefonico"/>
                                           </div> 
                                         
                                           <div className="mb-3">
                                             <label htmlFor="exampleInputPassword1" className="form-label">Correo</label>
-                                            <input type="email" className="form-control" {...register("email", {required: true})} autoComplete="off" placeholder="ingrese su correo"/>
+                                            <input type="email" className="form-control" {...register("email", {required: true})} autoComplete="off" placeholder="Ingrese su correo"/>
                                           </div>        
                                           {
                                             errors.email && <p className='text-danger'>El correo electronico es obligatorio</p>
                                           }       
                                           <div className="mb-3">
                                             <label htmlFor="exampleInputPassword1" className="form-label">contraseña</label>
-                                            <input type="password" className="form-control" {...register("u_password", {required: true})} autoComplete="off" placeholder="ingrese su contraseña"/>
+                                            <input type="password" className="form-control" {...register("u_password", {required: true})} autoComplete="off" placeholder="Ingrese su contraseña"/>
                                           </div>        
                                           {
                                             errors.u_password && <p className='text-danger'>La contraseña es obligatoria</p>
@@ -94,13 +92,16 @@ const Inicio = () =>{
                                     </div>
                                     <div className="modal-footer justify-content-center">
                                       <div className="d-grid gap-2 d-md-block">
-                                        <button className="btn btn-danger btn-sm"  data-bs-target="#segundamodal" aria-label="close"  data-bs-toggle="modal">Volver</ button>
+                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal">Volver</ button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                            </div> 
-                            {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
+          </div> 
+          {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
+          {/*ABRE iNFONAV*/} 
+          <header className="header justify-items-center">
+
               <nav className="nav d-flex justify-content-center top-none" style={{backgroundColor: "#C23373"}}>
                   <a href="#Tituloservicios">contacto</a>
                   <a href="#Tituloservicios">Servicios</a>
