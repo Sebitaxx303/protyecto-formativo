@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
+
 const NavbarTaller = () => {
     const { logout } = useAuth();
   return (
     <>
         {/*ABRE NAVBAR TALLER*/}
-        <nav className="navbar navbar-expand-lg container-fluid z-2 d-flex" style={{backgroundColor: '#79155B'}}>
+        <nav className="navbar navbar-expand-lg container-fluid z-2 d-flex" style={{backgroundColor: '#12245f'}}>
             
                 <div className="container-fluid">
-                    <div className="nav-item h-auto col-2 position-relative text-center"><img className="img-thumbnail" style={{borderRadius: '100%', width: '100px'}} src="../images/download.png" alt=""/>
+                    <div className="nav-item h-auto col-2 position-relative text-center">
+                    {/* <img className="img-thumbnail" style={{borderRadius: '100%', width: '100px'}} src="../images/download.png" alt=""/>  */}
                     </div>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                       <span className="navbar-toggler-icon"></span>

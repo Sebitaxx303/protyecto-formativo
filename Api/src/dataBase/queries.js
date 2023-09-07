@@ -12,5 +12,5 @@ export const machinesQueries= {
     getmachine: 'SELECT * FROM machines WHERE id_machine = @id_machine AND id_user = @id_user',
     addmachine: 'INSERT INTO machines (id_user, machine_type, mach_description, photo) values (@id_user, @machine_type, @mach_description, @photo)',
     updatemachine: 'UPDATE machines SET machine_type = @machine_type, mach_description = @mach_description, photo = @photo WHERE id_machine = @id_machine AND id_user = @id_user',
-    deleteMachine: 'DELETE FROM machines WHERE id_machine = @id_machine AND id_user = @id_user'
+    deleteMachine: 'DELETE FROM machines WHERE id_user = @id_user AND id_machine = @id_machine'
 }

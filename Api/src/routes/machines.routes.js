@@ -12,7 +12,7 @@ router.post('/add-machine', requiredAuth ,addMachine)
 router.get('/get-machines', requiredAuth, getMachines)
 router.get('/get-machine', requiredAuth, getMachine)
 router.put('/update-machine', requiredAuth, updateMachine)
-router.delete('/delete-machine',requiredAuth, deleteMachine)
+router.delete('/delete-machine/:id_machine',requiredAuth, deleteMachine)
 
 
 export default router

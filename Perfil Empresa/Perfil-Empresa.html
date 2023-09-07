@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Empresa</title>
+    <link rel="stylesheet" href="Perfil-Empresa.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-4 main-container">
+            <div class="input-container">
+              Cambiar
+              <input type="file" id="archivo" name="archivo" />
+            </div>
+            <div class="preview-container">
+              <img src="" id="preview">
+            </div>
+          </div>
+          
+          <div class="col-8" id="Informacion-empresa">
+            <h3>Informacion de la Empresa</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate voluptatem odio doloribus. Veritatis, maxime? Fugit dolorem ipsum nihil iure commodi numquam suscipit doloribus corrupti nam, tenetur qui deleniti accusamus ex culpa aperiam doloremque odio alias natus sunt? Suscipit officiis repellendus labore, tempora ratione commodi harum omnis accusantium consequatur praesentium ab perspiciatis quos, iure vel, recusandae dolorum ipsam placeat nemo. Voluptates ipsum ullam vero est quod, dolores laboriosam omnis odit, sequi voluptate nulla fugit amet sint eveniet unde illum commodi modi, officiis totam? Sapiente dolorem assumenda nostrum dicta deleniti illum magni accusantium in consequatur suscipit magnam soluta ducimus quis, odio laboriosam?</p>
+          </div>
+        </div>  
+        <div class="mt-5 row">
+          <nav class="nav-empre">
+            <div class="nave">
+              <ul class="lista">
+                <li><a href="#">Historial</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Servicio</a></li>
+              </ul>
+            </div>
+          </nav> 
+
+            <section class="Historial">
+                Carlos
+            </section>
+
+            <section class="Contacto">
+                Manuel 
+            </section>
+
+            <section class="Servicio">
+                Camargo
+            </section>
+        </div>
+          <script>
+          
+            function mostrarImagen(event){
+              var imagenSource = event.target.result;
+              var previewImage = document.getElementById('preview');
+          
+              previewImage.src = imagenSource;
+            }
+          
+            function procesarArchivo(event){
+               var imagen = event.target.files[0];
+          
+               var lector = new FileReader();
+          
+               lector.addEventListener('load', mostrarImagen, false);
+          
+               lector.readAsDataURL(imagen);
+            }
+          
+            document.getElementById('archivo')
+              .addEventListener('change', procesarArchivo, false)
+          </script>
+</body>
+</html>

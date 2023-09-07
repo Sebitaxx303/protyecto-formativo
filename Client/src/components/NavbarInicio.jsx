@@ -21,7 +21,7 @@ const Navbarinic = () =>{
     return(
         <>
             {/*ABRE HEADER*/} 
-            <header className="header container-fluid" style={{backgroundColor: "#79155B"}}>
+            <header className="header container-fluid" style={{backgroundColor: "#12245f"}}>
 
                     {/*ABRE NAV*/} 
                     <nav className="nav row">
@@ -39,7 +39,7 @@ const Navbarinic = () =>{
 
                         {/*ABRE DIV DE INICIO DE SESIÓN*/} 
                         <div className="col-6" id="contenido-nav"> 
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#primermodal" style = {{borderRadius: '12px', padding: '5px', border: '1px solid #C23373'}}>Inicio de Sesion</button>{/*BOTON PARA ABRIR VENTANA MODAL*/} 
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#primermodal" style = {{borderRadius: '12px', padding: '5px', border: '1px solid #155d8d'}}>Inicio de Sesion</button>{/*BOTON PARA ABRIR VENTANA MODAL*/} 
                         </div>
                         {/*CIERRA DIV DE INICIO DE SESIÓN*/} 
                             {/*ABRE MODAL DE LOGIN*/} 
@@ -78,13 +78,13 @@ const Navbarinic = () =>{
                                           <label htmlFor="password">Contraseña</label>
                                         </div>
 
-                                        <button type="submit" className="btn text-light" data-bs-dismiss="modal" aria-label="Close"  style={{backgroundColor: '#C23373', width: '100%'}}>Entrar</button>
+                                        <button type="submit" className="btn text-light" data-bs-dismiss="modal" aria-label="Close"  style={{backgroundColor: '#1db0c0', width: '100%'}}>Entrar</button>
                                       </form>
                                     </div>
                                     <div className="modal-footer justify-content-center">
                                       <p>¿No tienes una cuenta?</p>
                                       <div className="d-grid gap-2 d-md-block">
-                                        <Link to="/"><button className="btn btn-sm text-light" style={{backgroundColor: '#C23373'}}  data-bs-target="#modalRegistroTaller"   data-bs-toggle="modal">Registarme</ button></Link>
+                                        <Link to="/"><button className="btn btn-sm text-light" style={{backgroundColor: '#5120d4'}}  data-bs-target="#modalRegistroTaller"   data-bs-toggle="modal">Registarme</ button></Link>
                                       </div>
                                     </div>
                                   </div>

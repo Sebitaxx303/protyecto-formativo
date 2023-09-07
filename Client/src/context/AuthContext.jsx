@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest } from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest } from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -17,6 +17,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [machine, setMachine] = useState(null)
+    const [getUser, setgetUser] = useState(null)
+    const [getMachine, setGetMachine] = useState(null)
     const [isAuthenticathed, setIsAuthenticathed] = useState(false);
     const [errors , setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -67,6 +69,38 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const DeleteMachine = async (id) => {
+        try {
+            await DeleteMachineRequest(id)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        async function getUsers(){
+        try {
+            const getUser = await GetUserRequest()
+            setgetUser(getUser.data)
+            console.log(getUser)
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    getUsers();
+      },[])
+    useEffect(()=>{
+    async function machines(){
+    try {
+        const getMachine = await GetMachineRequest()
+        if(getMachine != null) {setGetMachine(getMachine.data)}
+    } catch (error) {
+      console.log(error)
+    }
+}
+ machines();
+  },[])
+  
     useEffect(() => {
         if(errors.length > 0){
             const timer = setTimeout(() => {
@@ -86,7 +120,6 @@ export const AuthProvider = ({ children }) => {
             }
             try {
                 const res = await VerifyTokenRequest(cookies.token)
-                console.log(res)
                 if(!res.data){
                     setIsAuthenticathed(false);
                     setLoading(false)
@@ -108,7 +141,10 @@ export const AuthProvider = ({ children }) => {
             signin,
             logout,
             AddMachine,
+            getUser,
             machine,
+            getMachine,
+            DeleteMachine,
             user, 
             isAuthenticathed,
             errors,

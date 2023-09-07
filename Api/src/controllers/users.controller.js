@@ -65,19 +65,6 @@ export const logout = (req,res) => {
     return res.sendStatus(200);
 }
 
-export const profile = async (req,res) => {
-    let id = req.user._id
-    try {
-        const pool = await getConnection()
-        const results = await pool.request()
-        .input('id', id)
-        .query(userQueries.profile)
-        res.json(results)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 export const VerifyToken = async (req,res) => {
     const { token } = req.cookies
     if(!token) return res.status(400).json({message: 'No estas autorizado'})
@@ -99,17 +86,15 @@ export const VerifyToken = async (req,res) => {
     })
 }
 
-export const name = async (req,res) => {
-    const id = req.user._id
-    
+export const profile = async (req,res) => {
+    let id = req.user._id
     try {
         const pool = await getConnection()
         const results = await pool.request()
         .input('id', id)
-        .query(userQueries.user_name)
-        res.json(results)
+        .query(userQueries.profile)
+        res.json(results.recordset)
     } catch (error) {
         console.log(error)
     }
-
 }

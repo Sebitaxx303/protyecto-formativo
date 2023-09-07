@@ -87,12 +87,12 @@ const Inicio = () =>{
                                           {
                                             errors.u_password && <p className='text-danger'>La contraseña es obligatoria</p>
                                           }    
-                                          <button type="submit"  className="btn text-light" style={{backgroundColor: '#C23373'}}>Registrate</button>
+                                          <button type="submit"  className="btn text-light" style={{backgroundColor: '#1db0c0'}}>Registrate</button>
                                       </form> 
                                     </div>
                                     <div className="modal-footer justify-content-center">
                                       <div className="d-grid gap-2 d-md-block">
-                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal">Volver</ button>
+                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"style={{backgroundColor: '#5120d4'}}>Volver</ button>
                                       </div>
                                     </div>
                                   </div>
@@ -102,7 +102,7 @@ const Inicio = () =>{
           {/*ABRE iNFONAV*/} 
           <header className="header justify-items-center">
 
-              <nav className="nav d-flex justify-content-center top-none" style={{backgroundColor: "#C23373"}}>
+              <nav className="nav d-flex justify-content-center top-none" style={{backgroundColor: "#155d8d"}}>
                   <a href="#Tituloservicios">contacto</a>
                   <a href="#Tituloservicios">Servicios</a>
                   <a href="#Tituloservicios">Sobre nosotros</a>
@@ -111,7 +111,7 @@ const Inicio = () =>{
           {/*CIERRA iNFONAV*/}
           {/*ABRE CARRUSEL*/}         
           <div className="container rounded mt-5"  id="carrucel">
-                  <div id="carouselExampleCaptions" style={{border: '2px solid #F6635C'}} className=" rounded carousel slide">
+                  <div id="carouselExampleCaptions" style={{border: '2px solid #155d8d'}} className=" rounded carousel slide">
                     <div className="carousel-indicators" style={{color: '#79155B'}}>
                       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active"
                         aria-current="true" aria-label="Slide 1"></button>
@@ -183,7 +183,7 @@ const Inicio = () =>{
           </div>
           {/*CIERRA SECCION INFO*/}
           {/*ABRE FOOTER*/} 
-          <footer className="container rounded-top bg-black text-center p-5 mt-4" style={{border: '2px solid #C23373'}}>
+          <footer className="container rounded-top bg-black text-center p-5 mt-4" style={{border: '2px solid #155d8d'}}>
                           < a to ="#"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
                               className="bi bi-facebook" viewBox="0 0 16 16">
                               <path

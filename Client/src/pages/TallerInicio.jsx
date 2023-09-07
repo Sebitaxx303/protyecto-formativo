@@ -6,7 +6,7 @@ const InicioTaller = () => {
         <NavbarTaller/>
         
             <div className="container">
-            <div className="container-fluid rounded-bottom-5 position-relative text-center p-3 border-top-0" style={{height:'35rem', backgroundColor: '#79155B', border: '2px solid black'}}>
+            <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'35rem', backgroundColor: '#5120d4'}}>
                 <div className="container-fluid mt-1">
                     <div className="container text-center text-light">
                     <h1>Publicaciones de confección</h1>

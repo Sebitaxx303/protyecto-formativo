@@ -6,16 +6,16 @@ import { useAuth } from '../context/AuthContext';
 const NavbarMaquinas = () => {
   const { register, handleSubmit, formState:{errors} } = useForm();
   const { AddMachine, errors: RegisterErrors } = useAuth();
-  const onSubmited = handleSubmit( async (values) => {
-    AddMachine(values);
-
+  const onSubmited = handleSubmit( async (data) => {
+    AddMachine(data);
+    window.location.reload()
     })
   return (
   <>
-      <nav className="navbar row navbar-expand-lg" style={{backgroundColor: '#79155B'}}>
+      <nav className="navbar row navbar-expand-lg" style={{backgroundColor: '#12245f'}}>
         <div className='contaner-fluid'>
               <div className="nav-item h-auto  aling-content-center col-5 text-center float-start">
-                  <img className="img-thumbnail" style={{borderRadius: '10%', width: '100px'}}    src="../images/download.png" alt=""/>
+                  {/* <img className="img-thumbnail" style={{borderRadius: '10%', width: '100px'}}    src="../images/download.png" alt=""/> */}
               </div>
               {/*ABRE OPCIONES DEL NAVBAR*/} 
               <div className="collapse navbar-collapse position-relative " style={{justifyContent: 'end'}} id="menu">
@@ -32,7 +32,7 @@ const NavbarMaquinas = () => {
               {/*CIERRA OPCIONES DEL NAVBAR*/} 
               {/*ABRE MODAL DE REGSITRO DE TALLER*/} 
               <div className="modal fade" id="registroMaquinas" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog modal-dialog-scrollable">
+                                <div className="modal-dialog modal-dialog-centered">
                                   <div className="modal-content" style={{border: 'Solid'}}>
                                     <div className="modal-header">
                                       <h1 className="modal-title fs-5"  id="exampleModalLabel">Registrar maquina</h1>

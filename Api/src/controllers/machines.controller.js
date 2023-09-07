@@ -64,15 +64,16 @@ export const updateMachine = async (req,res) => {
 }
 export const deleteMachine = async (req, res) => {
     const id_user = req.user._id
-    const { id_machine }= req.body
+    const  { id_machine }  = req.params
     try {
         const pool = await getConnection();
         const results = await pool.request()
-        .input("id_user",sql.Int,id_user)
-        .input("id_machine",sql.Int, id_machine)
+        .input("id_user", sql.Int, id_user)
+        .input("id_machine", sql.Int, id_machine)
         .query(machinesQueries.deleteMachine)
         res.status(200).json({message: 'Eliminada con exito'})
     } catch (error) {
+        console.log(error)
         res.status(400).json(error)
     }
 }

@@ -1,51 +1,49 @@
 
-import { useState } from 'react'
 import NavbarMaquinas from '../components/NavbarMaquinas.jsx'
-import { GetMachineRequest } from '../api/auth.js'
-
-
-
+import { useAuth } from '../context/AuthContext.jsx'
 
 const TallerMaquinas = () => {
-  const [machine, setMachine] = useState([])
-
-  const handleClick = async () => {
-    const machine = GetMachineRequest()
-    setMachine((await machine).data)
-  }
-  
+const { getMachine } = useAuth();
   return (
     <>
         <NavbarMaquinas/>
-        <div className="container d-flex justify-content-center align-items-center max-height-100%">
-          <button type='button' onClick={handleClick}>muestra las maquinas</button>
-                      
-                      <table className="table mt-4 text-center">
+        <div className="justify-content-center align-items-center" style={{width: "100%", height: "auto"}}>
+          <div className='container p-2 rounded-bottom-4  'style={{backgroundColor: '#5120d4'}}>
+                      {getMachine != null ?
+                      getMachine.map((machine )=> (
+                      <div className='rounded m-4 p-3' style={{border: "2px solid white", backgroundColor: '#12245f'}} key={machine.id_machine}> 
+                        <table className="table mt-2 text-center container-fluid">
                         <thead>
                           <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Tipo de maquina</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Foto</th>
+                            <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col"></th>
+                            <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Id</th>
+                            <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Tipo de maquina</th>
+                            <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">descripcion</th>
                           </tr>
                         </thead>
-                        {machine.map((machine,i) => (
-                        <tbody key={i}>
-                          <tr>
-                            <th scope="row" >{machine.id_machine}</th>
-                            <td>{machine.machine_type}</td>
-                            <td>{machine.mach_description}</td>
-                            <td>{machine.photo}</td>
-                          </tr>
-                        </tbody>
-                          ))}
+                            <tbody>
+                            <tr> 
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light'>{machine.photo}</td>
+                              <th style={{ backgroundColor: '#12245f'}} className='text-light'>{machine.id_machine}</th>
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light'>{machine.machine_type}</td>
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light'>{machine.mach_description}</td>
+                              <div style={{ backgroundColor: '#12245f'}}>
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light offset-1 col-6'><button type='button' className='btn btn-danger col text-light'>Eliminar</button></td>
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light offset-1 col-6'><button type='button' className='btn btn-info col text-light'>Actualizar</button></td>
+                              </div>
+                            </tr>
+                          </tbody>
                       </table> 
- 
-
+                      </div>
+                          )):
+                          <div className='rounded m-4 p-3' style={{border: "2px solid #79155B"}}>
+                            <h1>nada my rey</h1>
+                            </div>
+                        }
+                </div>
             </div>
 
     </>
   )
 }
-
 export default TallerMaquinas
