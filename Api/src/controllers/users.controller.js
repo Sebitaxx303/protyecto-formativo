@@ -59,6 +59,27 @@ export const login = async (req,res) => {
     }
 }
 
+export const Update = async (req,res) => {
+    const {company_name, rut, u_address, phone_number} = req.body
+    const id = req.user._id
+    console.log(id)
+    if(!id) return res.status(400).json({message: 'No estas autorizado'})
+    try {
+        const pool = await getConnection();
+        pool.request()
+        .input('id', sql.Int, id)
+        .input("company_name", sql.VarChar, company_name)
+        .input("rut", sql.VarChar, rut)
+        .input("u_address", sql.VarChar, u_address)
+        .input("phone_number", sql.VarChar, phone_number)
+        .query(userQueries.update)
+        res.json({message: 'Datos actualizados'})
+    } catch (error) {
+        res.status(500).json({ message: error.message});
+    }
+    
+}
+
 export const logout = (req,res) => {
     res.cookie('token','', {expires : new Date(0),
     });

@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import { useForm } from "react-hook-form"
 
 const PerfilTaller = () => {
+  const { register, handleSubmit, formState:{errors}  } = useForm();
+  const { update, errors: RegisterErrors } = useAuth();
   const { logout } = useAuth();
   const { getUser } = useAuth();
+  const onSubmitedUp = handleSubmit( async (values) => {
+    update(values); 
+    window.location.reload()
+  })
     return(
         <>
         {
@@ -39,8 +46,63 @@ const PerfilTaller = () => {
                    </div>
                    <div className="container-fluid">
                       <div className="d-grid col-6 mx-auto">
-                        <button className='btn btn-primary'>Editar perfil
-                        </button>    
+                        <button className='btn btn-primary' data-bs-target="#modalActualizacionUsuario"   data-bs-toggle="modal">Editar perfil
+                        </button>
+                        <div className="modal fade" id="modalActualizacionUsuario" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-scrollable">
+                                  <div className="modal-content" style={{border: 'Solid'}}>
+                                    <div className="modal-header">
+                                      <h1 className="modal-title fs-5"  id="exampleModalLabel">Iniciar sesión</h1>
+                                      <button type="button" className="btn-close"   data-bs-dismiss="modal" aria-label="Close"></ button>
+                                    </div>
+                                    <div className="modal-body">
+                                    {
+                                      RegisterErrors.map((error, i)=> (
+                                        <div className='bg-danger' key={i}>
+                                          {error}
+                                          </div>
+                                      ))
+                                    }
+                                      <form onSubmit={onSubmitedUp}>    
+                                      
+
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">Nombre de la entidad</label>
+                                            <input type="text" className="form-control" {...register("company_name", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese el nombre de la entidad" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.company_name && <p className='text-danger'>El nombre de la entidad es obligatorio</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">RUT</label>
+                                            <input type="number" className="form-control" {...register("rut", {required: true})} autoComplete="off" placeholder="Ingrese el RUT de la entidad"/>
+                                          </div>        
+                                          {
+                                            errors.rut && <p className='text-danger'>El RUT es obligatorio</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">direccion</label>
+                                            <input type="text" className="form-control" {...register("u_address", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese la direccion de la entidad" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.u_address && <p className='text-danger'>La dirección es obligatoria</p>
+                                          }
+                                          <div className="mb-3">
+                                              <label htmlFor="exampleInputPassword1" className="form-label">Numero de telefono</label>
+                                              <input type="number" className="form-control" {...register("phone_number", {required: true})} autoComplete="off" placeholder="Ingrese su número telefonico"/>
+                                          </div> 
+ 
+                                          <button type="submit"  className="btn text-light" style={{backgroundColor: '#1db0c0'}}>Actualizar</button>
+                                      </form> 
+                                    </div>
+                                    <div className="modal-footer justify-content-center">
+                                      <div className="d-grid gap-2 d-md-block">
+                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"style={{backgroundColor: '#5120d4'}}>Volver</ button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                        </div>     
                       </div>   
                       <ul className='container-fluid'>
                           <li className="row align-items-center">

@@ -439,7 +439,8 @@ width: 100%;
 #menu ul ul li {
   float:none;
   width: 200px;
- }
+}
+ 
 #menu ul ul button {
 line-height:120%;
 padding:10px 15px;

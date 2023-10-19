@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest } from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest } from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -46,6 +46,16 @@ export const AuthProvider = ({ children }) => {
                 setErrors(error.data.message)
             }
             setErrors([error.response.data.message]);
+        }
+    }
+
+    const update = async (user)=> {
+        try {
+            const res = await UpdateRequest (user)
+            setUser(res.data);
+        } catch (error) {
+            setErrors(error.response.data)
+            console.log((error))
         }
     }
 
@@ -139,6 +149,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             signup,
             signin,
+            update,
             logout,
             AddMachine,
             getUser,
