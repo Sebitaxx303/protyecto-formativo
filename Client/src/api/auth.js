@@ -18,6 +18,6 @@ export const AddMachineRequest = machine => axios.post('/add-machine', machine)
 
 export const GetMachineRequest = () => axios.get('/get-machines')
 
-export const DeleteMachineRequest = id => axios.delete('/delete-machine'+'/'+id)
+export const DeleteMachineRequest = id => axios.delete(`/delete-machine/${id}`)
 
-export const UpdateMachineRequest = (id, machine) => axios.put('update-machine'+'/'+id, machine)
+export const UpdateMachineRequest = (id, machine) => axios.put(`update-machine/${id}`, machine)

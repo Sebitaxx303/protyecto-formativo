@@ -1,9 +1,20 @@
-
 import NavbarMaquinas from '../components/NavbarMaquinas.jsx'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 
 const TallerMaquinas = () => {
-const { getMachine, DeleteMachine } = useAuth();
+
+const { UpdateMachine, getMachine, DeleteMachine, errors: RegisterErrors } = useAuth();
+const { register ,handleSubmit, formState:{errors}  } = useForm()
+const navigate = useNavigate()
+const params = useParams()
+const submitUpdate = handleSubmit( async (data)=>{
+  UpdateMachine(params.id_machine, data)
+  console.log(params)
+  navigate('/taller-maquinas') 
+})
+
   return (
     <>
         <NavbarMaquinas/>
@@ -28,50 +39,61 @@ const { getMachine, DeleteMachine } = useAuth();
                               <td style={{ backgroundColor: '#12245f'}} className='text-light'>{machine.machine_type}</td>
                               <td style={{ backgroundColor: '#12245f'}} className='text-light'>{machine.mach_description}</td>
                               <div style={{ backgroundColor: '#12245f'}}>
-                              <td style={{ backgroundColor: '#12245f'}} className='text-light offset-1 col-6'><button onClick={() => DeleteMachine(machine.id_machine) } type='button' className='btn btn-danger col text-light'>Eliminar</button></td>
-                              <td style={{ backgroundColor: '#12245f'}} className='text-light offset-1 col-6'><button type='button' className='btn btn-info col text-light'>Actualizar</button></td>
-                              <div className="modal fade" id="primermodal" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light offset-1 col-6'>
+                                <button onClick={() => DeleteMachine(machine.id_machine) } type='button' className='btn btn-danger col text-light'>Eliminar</button>
+                                </td>
+                              <td style={{ backgroundColor: '#12245f'}} className='text-light offset-1 col-6'>
+
+                                <Link to={`/taller-maquinas/${machine.id_machine}`}>
+                                  <button type='button' data-bs-toggle="modal" className="btn text-light"  data-bs-target="#actualizacionM" style={{backgroundColor: '#1db0c0', width: '100%'}}>actualizar</button>
+                                  </Link>
+                                </td>
+                              <div className="modal fade" id="actualizacionM" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-centered">
                                   <div className="modal-content" style={{border: 'Solid'}}>
                                     <div className="modal-header">
-                                      <h1 className="modal-title fs-5"  id="exampleModalLabel">Iniciar sesión</h1>
+                                      <h1 className="modal-title fs-5"  id="exampleModalLabel">Actualizacion de datos</h1>
                                       <button type="button" className="btn-close"   data-bs-dismiss="modal" aria-label="Close"></ button>
                                     </div>
                                     <div className="modal-body">
                                       {
-                                         SigninErrors.map((error, i)=> (
+                                         RegisterErrors.map((error, i)=> (
                                            <div className='bg-danger text-light rounded text-center' key={i}>
                                              {error}
                                              </div>
                                          ))
                                       }
-                                      <form onSubmit={onSubmitedLog}>
+                                      <form onSubmit={submitUpdate}>
 
-                                          {
-                                            errors.email && <p className='text-danger'>El email es obligatorio</p>
-                                          }  
-                                        <div className="input-box">                                       
-                                          <span className="icon"><i className="bi bi-envelope-fill"></i><ion-icon name="mail"></ion-icon>
-                                          </span>
-                                          <input type="email" {...register("email", {required: true})}/>
-                                          <label htmlFor="Email">Email</label>
+                                      <div className="mb-3">
+                                          <label>Tipo de maquina</label>
+                                          <select className="form-control" {...register("machine_type", {required: true})} placeholder="Ingrese su tipo de maquina">
+                                            <option>busos</option>
+                                            <option>camisas</option>
+                                            <option>jeans</option>
+                                            <option>medias</option>
+                                            <option>zapatos</option>
+                                          </select>
                                         </div>
                                           {
-                                              errors.u_password && <p className='text-danger'>La contraseña es obligatoria</p>
+                                            errors.machine_type && <p className='text-danger'>El tipo de maquina es obligatorio</p>
                                           }
-                                        <div className="input-box">
-                                          <span className="icon"><ion-icon  name="lock-closed"><i className="bi  bi-key-fill"></i></ion-icon></span>
-                                          <input type="password" {...register("u_password", {required: true})} />
-                                          <label htmlFor="password">Contraseña</label>
-                                        </div>
-
-                                        <button type="submit" className="btn text-light" data-bs-dismiss="modal" aria-label="Close"  style={{backgroundColor: '#1db0c0', width: '100%'}}>Entrar</button>
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">descripción</label>
+                                            <input type="text" className="form-control" {...register("mach_description", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese una descripcion de la maquina" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.mach_description && <p className='text-danger'>la descripcion es obligatoria</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">Imagen</label>
+                                            <input type="file" className="form-control" {...register("no", {required: false})} autoComplete="off" placeholder="ingrese una imagen de la maquina"/>
+                                          </div>  
+                                          <button type='submit' data-bs-dismiss="modal" aria-label="Close"   className='btn btn-info col text-light'>Actualizar</button>
                                       </form>
                                     </div>
                                     <div className="modal-footer justify-content-center">
-                                      <p>¿No tienes una cuenta?</p>
                                       <div className="d-grid gap-2 d-md-block">
-                                        <Link to="/"><button className="btn btn-sm text-light" style={{backgroundColor: '#5120d4'}}  data-bs-target="#modalRegistroTaller"   data-bs-toggle="modal">Registarme</ button></Link>
                                       </div>
                                     </div>
                                   </div>

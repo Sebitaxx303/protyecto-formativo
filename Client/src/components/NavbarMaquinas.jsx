@@ -32,7 +32,7 @@ const NavbarMaquinas = () => {
                     </ul>
               </div>
               {/*CIERRA OPCIONES DEL NAVBAR*/} 
-              {/*ABRE MODAL DE REGSITRO DE TALLER*/} 
+              {/*ABRE MODAL DE REGSITRO DE MAQUINA*/} 
               <div className="modal fade" id="registroMaquinas" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-centered">
                                   <div className="modal-content" style={{border: 'Solid'}}>
@@ -72,7 +72,7 @@ const NavbarMaquinas = () => {
                                           }
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">Imagen</label>
-                                            <input type="file" className="form-control" {...register("no", {required: true})} autoComplete="off" placeholder="ingrese una imagen de la maquina"/>
+                                            <input type="file" className="form-control" {...register("no", {required: false})} autoComplete="off" placeholder="ingrese una imagen de la maquina"/>
                                           </div>        
                                           <button type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
                                       </form> 
