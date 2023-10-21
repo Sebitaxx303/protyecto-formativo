@@ -2,10 +2,7 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
 
-const NavbarTaller = () => {
-    const refresh = () => {
-        window.location.reload()
-    }
+const NavbarEmpresa = () => {
     const { logout } = useAuth();
   return (
     <>
@@ -26,7 +23,7 @@ const NavbarTaller = () => {
                                         <Link className="text-wrap text-center"to="/HistorialPeticiones">Historial de peticiones</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <button type="button" onClick={refresh}><Link className="text-wrap text-center" to="/taller-maquinas">Registrar maquinas</Link></button>
+                                        <button type="button"><Link className="text-wrap text-center" to="/taller-maquinas">Registrar maquinas</Link></button>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="text-wrap text-center"to="/RegistroCalificaciones">Registro de calificaciones</Link>
@@ -47,9 +44,9 @@ const NavbarTaller = () => {
                         </div>
                     </div>
         </nav>
-        {/*ABRE NAVBAR TALLER*/}
+        {/*CIERRA NAVBAR TALLER*/}
     </>
   )
 }
 
-export default NavbarTaller
+export default NavbarEmpresa

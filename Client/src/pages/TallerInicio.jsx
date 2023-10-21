@@ -1,11 +1,12 @@
 import NavbarTaller from "../components/NavbarTaller"
 
+
 const InicioTaller = () => {
   return (
         <>
         <NavbarTaller/>
         
-            <div className="container">
+            <div className="container" >
             <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'35rem', backgroundColor: '#5120d4'}}>
                 <div className="container-fluid mt-1">
                     <div className="container text-center text-light">

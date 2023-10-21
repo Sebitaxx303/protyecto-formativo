@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest } from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest } from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
     const [machine, setMachine] = useState(null)
     const [getUser, setgetUser] = useState(null)
     const [getMachine, setGetMachine] = useState(null)
+    const [userType, setUserType] = useState(null)
     const [isAuthenticathed, setIsAuthenticathed] = useState(false);
     const [errors , setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await RegisterRequest (user)
             setIsAuthenticathed(true);
+            window.location.reload()
             setUser(res.data);
         } catch (error) {
             setErrors(error.response.data)
@@ -39,6 +41,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await LoginRequest(user);
             setIsAuthenticathed(true);
+            window.location.reload()
             setUser(res.data)
         } catch (error) {
             console.log(error)
@@ -53,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await UpdateRequest (user)
             setUser(res.data);
+            window.location.reload()
         } catch (error) {
             setErrors(error.response.data)
             console.log((error))
@@ -73,6 +77,19 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await AddMachineRequest (machine)
             setMachine(res.data)
+            window.location.reload()
+        } catch (error) {
+            setErrors(error.response.data)
+            console.log((error))
+        }
+    }
+
+    const UpdateMachine = async (id,machine)=>{
+        try {
+            const res = await UpdateMachineRequest(id,machine)
+            setMachine(res.data)
+            console.log(res.data)
+            window.location.reload()
         } catch (error) {
             setErrors(error.response.data)
             console.log((error))
@@ -82,17 +99,30 @@ export const AuthProvider = ({ children }) => {
     const DeleteMachine = async (id) => {
         try {
             await DeleteMachineRequest(id)
+            window.location.reload()
         } catch (error) {
             console.log(error)
         }
     }
+
+    useEffect(()=> {
+        async function getType(){
+            try {
+                const userType = await GetUserTypeRequest()
+                setUserType(userType.data)
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getType()
+    },[])
 
     useEffect(()=>{
         async function getUsers(){
         try {
             const getUser = await GetUserRequest()
             setgetUser(getUser.data)
-            console.log(getUser)
         } catch (error) {
           console.log(error)
         }
@@ -103,7 +133,9 @@ export const AuthProvider = ({ children }) => {
     async function machines(){
     try {
         const getMachine = await GetMachineRequest()
-        if(getMachine != null) {setGetMachine(getMachine.data)}
+        if(getMachine != null) {
+            setGetMachine(getMachine.data)
+        }
     } catch (error) {
       console.log(error)
     }
@@ -151,8 +183,10 @@ export const AuthProvider = ({ children }) => {
             signin,
             update,
             logout,
+            UpdateMachine,
             AddMachine,
             getUser,
+            userType,
             machine,
             getMachine,
             DeleteMachine,

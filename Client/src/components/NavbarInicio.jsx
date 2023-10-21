@@ -7,12 +7,13 @@ import { useEffect } from "react"
 const Navbarinic = () =>{
 
       const { register, handleSubmit, formState:{errors} } = useForm()
-      const {signin,  isAuthenticathed, errors: SigninErrors } = useAuth();
+      const {signin, userType,  isAuthenticathed, errors: SigninErrors } = useAuth();
       const navigate = useNavigate();
   
       useEffect(()=>{
-        if(isAuthenticathed) navigate('/taller-inicio');
-      },[isAuthenticathed, navigate])
+        if(isAuthenticathed && userType === 'taller') navigate('/taller-inicio')
+        else if (isAuthenticathed && userType == 'empresa') navigate('/empresa-inicio')
+      },[isAuthenticathed, navigate, userType])
 
       const onSubmitedLog = handleSubmit( async (data) => {
         signin(data);

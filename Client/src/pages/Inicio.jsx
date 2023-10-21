@@ -6,14 +6,14 @@ import { useEffect } from "react"
 
 const Inicio = () =>{
   const { register, handleSubmit, formState:{errors} } = useForm();
-  const {signup,  isAuthenticathed, errors: RegisterErrors } = useAuth();
+  const {signup, userType,  isAuthenticathed, errors: RegisterErrors } = useAuth();
   const navigate = useNavigate();
   useEffect(()=>{
-    if(isAuthenticathed) navigate('/taller-inicio');
-  },[isAuthenticathed, navigate])
+    if(isAuthenticathed && userType === 'taller') navigate('/taller-inicio')
+    else if (isAuthenticathed && userType === 'empresa') navigate ('/empresa-inicio')
+  },[isAuthenticathed, navigate, userType])
   const onSubmitedReg = handleSubmit( async (values) => {
     signup(values);
-
     })
     return(
         <>

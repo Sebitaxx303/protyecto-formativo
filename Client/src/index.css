@@ -10,10 +10,16 @@
   font-family: 'Space Grotesk', sans-serif;
   list-style: none;
 }
-
+html,
+body {
+  height: 100%;
+}
 body{
-  min-height: 100vh;
-  position: relative;
+  background-image: url('../public/Images/fondo.svg');
+  background-repeat:repeat-y;
+  background-attachment:scroll;
+  background-position:center center;
+  background-size: cover;
 }
 
 header img {
@@ -394,19 +400,19 @@ width: 100%;
 .conte::-webkit-scrollbar-track {
   border-radius: 10px;  
 }
-#menu{
+#navbarNavDropdown{
   justify-content: end;
 }
-#menu ul{
+#navbarNavDropdown ul{
   list-style: none;
   margin: 0%;
   padding: 0%;
   width: 100%;
 }
-#menu ul li a{
+#navbarNavDropdown ul li a{
   background-color:#12245f;
 }
-#menu ul a{
+#navbarNavDropdown ul a{
   display: block;
   color: #f1f2f3;
   text-decoration: none;
@@ -418,7 +424,7 @@ width: 100%;
   text-transform:uppercase;
   letter-spacing:1px;
 }
-#menu ul li {
+#navbarNavDropdown ul li {
   position:relative;
   float:left;
   width: 200px;
@@ -426,44 +432,39 @@ width: 100%;
   padding:0;
   margin-left: px;
  }
-#menu ul li :hover{
+#navbarNavDropdown ul li :hover{
   background:#1db0c0;
 }
-#menu ul ul {
+#navbarNavDropdown ul ul {
   display:none;
   position:absolute;
   top:100%;
   left:0;
   padding:0;
  }
-#menu ul ul li {
+#navbarNavDropdown ul ul li {
   float:none;
   width: 200px;
 }
  
-#menu ul ul button {
+#navbarNavDropdown ul ul button {
 line-height:120%;
 padding:10px 15px;
 }
-#menu ul li:hover > ul {
+#navbarNavDropdown ul li:hover > ul {
   display:block;
  }
-@media screen and (max-width:400px) {
-  
-}
- 
-#menu ul button{
+#navbarNavDropdown ul button{
   display: block;
   color: #f1f2f3;
   text-decoration: none;
   font-weight: 400;
   height: 75px;
   font-size:15px;
-  padding:10px;
   font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform:uppercase;
   letter-spacing:1px;
 }
-#menu ul li button{
+#navbarNavDropdown ul li button{
   background-color: #12245f;
 }

@@ -8,7 +8,6 @@ const NavbarMaquinas = () => {
   const { AddMachine, errors: RegisterErrors } = useAuth();
   const onSubmited = handleSubmit( async (data) => {
     AddMachine(data);
-    window.location.reload()
     })
   return (
   <>
@@ -18,12 +17,15 @@ const NavbarMaquinas = () => {
                   {/* <img className="img-thumbnail" style={{borderRadius: '10%', width: '100px'}}    src="../images/download.png" alt=""/> */}
               </div>
               {/*ABRE OPCIONES DEL NAVBAR*/} 
-              <div className="collapse navbar-collapse position-relative " style={{justifyContent: 'end'}} id="menu">
+              <button className="navbar-toggler" style={{color: "white", border: "none"}} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <i className="bi bi-filter-square-fill" style={{width: '100%'}}></i>
+              </button>
+              <div className="collapse navbar-collapse position-relative " style={{justifyContent: 'end'}} id="navbarNavDropdown">
                     <ul className="navbar-nav d-flex" style={{justifyContent: 'center', alignItems:'center'}}>
-                      <li className='list-item'>
+                      <li className='nav-item'>
                         <Link className='text-colapse text-center' to="/taller-inicio">Volver</Link>
                       </li>
-                      <li className='list-item'>
+                      <li className='nav-item'>
                         <button className='list-item text-wrap text-center'  type="button" data-bs-toggle="modal" data-bs-target="#registroMaquinas">Registrar nueva maquina
                         </button>
                       </li>

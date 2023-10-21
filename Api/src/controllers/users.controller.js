@@ -119,3 +119,17 @@ export const profile = async (req,res) => {
         console.log(error)
     }
 }
+
+export const userType = async(req,res) =>{
+    let id = req.user._id
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .input('id', sql.Int, id)
+        .query(userQueries.user_type)
+        res.json(results.recordset[0].user_type)
+        console.log(results.recordset[0].user_type)
+    } catch (error) {
+        
+    }
+}
