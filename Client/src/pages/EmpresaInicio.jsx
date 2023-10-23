@@ -1,5 +1,5 @@
 
-import { useEffect } from "react"
+// import { useEffect } from "react"
 import NavbarEmpresa from "../components/NavbarEmpresa"
 import { useAuth } from "../context/AuthContext"
 
@@ -23,13 +23,13 @@ const EmpresaInicio = () => {
                     { getTaller !== null ?
                       getTaller.map((taller) => (
                         <div  key={taller.id}>
-                          <table style={{height: '35vh'}} className="table mt-4  text-center container-fluid">
+                          <table style={{height: 'auto'}} className="table mt-4  text-center container-fluid">
                             <thead >
                               <tr>
                                 <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Encargado</th>
                                 <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Nombre del taller</th>
-                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Direccion del taller</th>
-                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Nmero de contacto</th>
+                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Dirección del taller</th>
+                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Número de contacto</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -38,8 +38,55 @@ const EmpresaInicio = () => {
                                 <td>{taller.company_name}</td>
                                 <td>{taller.u_address}</td>
                                 <td>{taller.phone_number}</td>
+                                  <button type='button' data-bs-toggle="modal" className=" btn text-light"  data-bs-target="#verperfil" style={{backgroundColor: '#12245f', marginLeft: '10px'}}>ver perfil</button>
+                                  {/*ABRE MODAL DE REGSITRO DE MAQUINA*/} 
+                                    <div className="modal fade" id="verperfil" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div className="modal-dialog modal-dialog-scrollable">
+                                        <div className="modal-content" style={{border: 'Solid'}}>
+                                          <div className="modal-header">
+                                            <h1 className="modal-title fs-5 text-collapse"  id="exampleModalLabel">ver perfil</h1>
+                                            <button type="button" className="btn-close"   data-bs-dismiss="modal" aria-label="Close"></ button>
+                                          </div>
+                                          <div className="modal-body">
+                                              <div className="row text-light rounded mt-2" style={{backgroundColor: '#12245f'}}>
+                                                  <div className="col-6"><p>nombre del encargado:</p></div>
+                                                  <div className="col-6">{taller.manager_name}</div>
+                                              </div>
+                                              <div className="row text-light rounded mt-2" style={{backgroundColor: '#12245f'}}>
+                                                  <div className="col-6"><p>nombre del taller:</p></div>
+                                                  <div className="col-6">{taller.company_name}</div>
+                                              </div>
+                                              <div className="row text-light rounded mt-2" style={{backgroundColor: '#12245f'}}>
+                                                  <div className="col-6"><p>Direccion:</p></div>
+                                                  <div className="col-6">{taller.u_address}</div>
+                                              </div>
+                                              <div className="row text-light rounded mt-2" style={{backgroundColor: '#12245f'}}>
+                                                  <div className="col-6"><p>nombre del encargado:</p></div>
+                                                  <div className="col-6">{taller.manager_name}</div>
+                                              </div>
+                                              <div className="row text-light rounded mt-2" style={{backgroundColor: '#12245f'}}>
+                                                  <div className="col-6"><p>nombre del encargado:</p></div>
+                                                  <div className="col-6">{taller.manager_name}</div>
+                                              </div>
+                                              <div className="row text-light rounded mt-2" style={{backgroundColor: '#12245f'}}>
+                                                  <div className="col-6"><p>nombre del encargado:</p></div>
+                                                  <div className="col-6">{taller.manager_name}</div>
+                                              </div>
+                                              
+                                          </div>
+                                          <div className="modal-footer justify-content-center">
+                                            <div className="d-grid gap-2 d-md-block">
+                                              <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div> 
+                                 {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
                               </tr>
+                              
                             </tbody>
+
                             </table>
                         </div>
                       )):

@@ -78,6 +78,17 @@ export const AuthProvider = ({ children }) => {
         
     }
 
+        //PETICION PARA ACEPTAR PETICIONES
+        const acceptRequest = async (id) =>{
+            try {
+                await AddMachineRequest(id)
+                window.location.reload()
+                window.alert('peticion aceptada exitosamente')
+            } catch (error) {
+                console.log((error))
+            }
+        }
+
    // PETICION PARA OBTENER TALLERES
     // const getTalleres = async () => {
     //     try {
@@ -136,7 +147,6 @@ export const AuthProvider = ({ children }) => {
             console.log(res)
             window.location.reload()
         } catch (error) {
-            setErrors(error.response.data)
             console.log((error))
         }
     }
@@ -287,6 +297,7 @@ export const AuthProvider = ({ children }) => {
             getUser,
             userType,
             user,
+            acceptRequest,
             getTaller,
 
             UpdateMachine,

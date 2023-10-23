@@ -17,7 +17,11 @@ const EmpresaPeticiones = () => {
                                 <h5>ID</h5>
                                 <p>{request.id}</p>
                             </div>
-                            <div className="col-2">
+                            <div className="col-1">
+                                <h5>Estado de peticion</h5>
+                                <p>{request.r_state}</p>
+                            </div>
+                            <div className="col-1">
                                 <h5>Tipo de peticion</h5>
                                 <p>{request.request_type}</p>
                             </div>

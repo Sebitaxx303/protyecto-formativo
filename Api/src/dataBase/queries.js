@@ -10,6 +10,7 @@ export const userQueries = {
     getManager: 'SELECT id_user, manager_name FROM managers M INNER JOIN users U ON M.id_user = U.id WHERE U.id = @id',
     update: 'UPDATE users SET manager_name = @manager_name, company_name = @company_name, rut = @rut, u_address = @u_address, phone_number = @phone_number, u_state = @u_state WHERE id = @id',
     profile: 'SELECT id, manager_name, company_name, user_type, rut, u_address, phone_number, register_date, u_state  FROM users WHERE id = @id',
+    acceptRequest: "INSERT INTO d_requests_talleres (id_user, id_request ) VALUES (@id_user, @id_request)",
 }
 export const machinesQueries= {
     getmachines: 'SELECT * FROM machines WHERE id_user = @id_user',
@@ -19,8 +20,8 @@ export const machinesQueries= {
     deleteMachine: 'DELETE FROM machines WHERE id_user = @id_user AND id_machine = @id_machine'
 }
 export const requestsQueries = {
-    addRequest: 'INSERT INTO requests (id_user, request_type, start_date, description, amount ) VALUES (@id_user, @request_type, GETDATE(), @description, @amount)',
-    getRequests: 'SELECT * FROM requests ',
+    addRequest: "INSERT INTO requests (id_user, request_type, start_date, description, r_state, amount ) VALUES (@id_user, @request_type, GETDATE(), @description, 'Activa' ,@amount)",
+    getRequests: "SELECT * FROM requests WHERE r_state = 'Activa' ",
     getRequestsUser: 'SELECT * FROM requests WHERE id_user = @id_user',
     getRequest:  'SELECT * FROM requests WHERE id_user = @id_user AND id = @id',
     updateRequest: 'UPDATE requests SET request_type = @request_type, description = @description, amount = @amount WHERE id_user = @id_user AND id = @id',

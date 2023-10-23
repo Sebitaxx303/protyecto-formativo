@@ -23,13 +23,10 @@ const NavbarTaller = () => {
                             <div id="menu" style={{width:'100%', display: 'flex'}} >
                                 <ul className="navbar-nav d-flex" style={{justifyContent: 'center', alignItems:'center'}}  id="menu">
                                     <li className="nav-item ">
-                                        <Link className="text-wrap text-center"to="/HistorialPeticiones">Historial de peticiones</Link>
+                                        <Link className="text-wrap text-center"to="/taller-peticiones">Historial de peticiones</Link>
                                     </li>
                                     <li className="nav-item">
                                         <button type="button" onClick={refresh}><Link className="text-wrap text-center" to="/taller-maquinas">Registrar maquinas</Link></button>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="text-wrap text-center"to="/RegistroCalificaciones">Registro de calificaciones</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="text-colapse text-center" to="#">Opciones de  usuario</Link> 

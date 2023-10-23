@@ -19,6 +19,8 @@ export const GetTalleresRequest = () => axios.get('/talleres')
 
 export const GetEmpresasRequest = () => axios.get('/empresas')
 
+export const AcceptRequestRequest = id => axios.post(`/request/${id}`)
+
 // PETICIONES DE MAQUINAS
 
 export const AddMachineRequest = machine => axios.post('/add-machine', machine)

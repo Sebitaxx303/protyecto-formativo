@@ -12,6 +12,7 @@ import EmpresaRoutes from './EmpresaRoutes'
 import EmpresaInicio from './pages/EmpresaInicio'
 import EmpresaPerfil from './pages/EmpresaPerfil'
 import EmpresaPeticiones from './pages/EmpresaPeticiones'
+import HistorialPeticiones from './pages/HistorialPeticiones'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path='/taller-inicio' element={<InicioTaller/>}/>
                 <Route path='/taller-perfil' element={<PerfilTaller/>}/>
                 <Route path='/taller-maquinas' element={<TallerMaquinas/>}/>
+                <Route path='/taller-peticiones' element={<HistorialPeticiones/>}/>
                 <Route path='/taller-maquinas/:id_machine' element={<TallerMaquinas/>}/>
               </Route>
               <Route element={<EmpresaRoutes/>}>

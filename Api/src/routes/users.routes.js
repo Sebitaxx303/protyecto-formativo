@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 //IMPORTACION DE CONTROLADORES
-import { Update, VerifyToken, empresas, login, logout, profile, register, talleres, userType } from "../controllers/users.controller.js";
+import { Update, VerifyToken, acceptRequest, empresas, login, logout, profile, register, talleres, userType } from "../controllers/users.controller.js";
 import { requiredAuth } from "../middlewares/tokenValidator.js";
 import { validatorSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/users.schema.js";
@@ -20,6 +20,8 @@ router.get('/type', requiredAuth, userType)
 router.get('/profile', requiredAuth, profile)
 router.get('/talleres', requiredAuth, talleres)
 router.get('/empresas', requiredAuth, empresas)
+router.post('/request/:id_request', requiredAuth, acceptRequest)
+
 
 
 export default router;

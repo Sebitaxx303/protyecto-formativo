@@ -158,3 +158,18 @@ export const empresas = async (req,res) => {
         console.log(error)
     }
 }
+
+export const acceptRequest = async (req,res) => {
+    let id_user = req.user._id
+    const { id_request } = req.params
+     try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .input("id_user", sql.Int, id_user)
+        .input("id_request", sql.Int, id_request)
+        .query(userQueries.acceptRequest)
+        res.json(results)
+     } catch (error) {
+        console.log(error)
+     }
+}

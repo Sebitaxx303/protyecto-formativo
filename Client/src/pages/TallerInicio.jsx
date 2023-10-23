@@ -1,9 +1,9 @@
-import { useEffect } from "react"
+
 import NavbarTaller from "../components/NavbarTaller"
 import { useAuth } from "../context/AuthContext"
 
 const InicioTaller = () => {
-const { getRequests } = useAuth()
+const { getRequests, acceptRequest } = useAuth()
 
 // useEffect(()=> {
 //   window.alert('Debes poner en activo tu estado en la aplicacion')
@@ -51,14 +51,17 @@ const { getRequests } = useAuth()
                                   <p>{request.description}</p>
                                 </div>
                               </div>
-
+                              <button onClick={() => acceptRequest(request.id)}  > aceptar peticion</button>
                             </div>
+                            
                           )):
                           <div>
                             <h1>no hay peticiones</h1>
                           </div>
                         }
                     </div> 
+                    
+                    
                 </div>
             </div>
           {/*ABRE FOOTER*/} 

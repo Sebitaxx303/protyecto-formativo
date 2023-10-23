@@ -7,7 +7,7 @@ create table taller_availability(
     u_state varchar(30) default 'Inactivo' primary key
 )
 go ----------------------------------------------
-insert into taller_availability (u_state) VALUES ('Activo')
+insert into taller_availability (u_state) VALUES ('Activo'), ('Inactivo')
 
 go ----------------------------------------------
 create table user_types(
@@ -75,16 +75,17 @@ r_state varchar(30) FOREIGN key REFERENCES request_availability,
 amount int,
 )
 go ----------------------------------------------
+create table d_requests_talleres (
+    id int identity (1,1) primary KEY,
+    id_request int FOREIGN KEY REFERENCES requests,
+    id_user int FOREIGN KEY REFERENCES users
+)
+go ----------------------------------------------
 create table ratings(
 id_rating int primary key identity(1,1),
 service_status varchar(30),
 recommendations nvarchar(500)
 )
 go ----------------------------------------------
-create table tbl_d_(
-id int identity (1,1) primary key,
-id_rating int foreign key references ratings,
-id_user int foreign key references users,
-id_request int foreign key references requests,
-)
+
 
