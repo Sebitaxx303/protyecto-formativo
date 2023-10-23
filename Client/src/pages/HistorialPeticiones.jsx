@@ -1,7 +1,10 @@
+import NavbarHistorialPeticiones from "../components/NavbarHistorialPeticiones"
 
 const HistorialPeticiones = () => {
   return (
-    <div>HistorialPeticiones</div>
+    <>
+      <NavbarHistorialPeticiones/>
+    </>
   )
 }
 

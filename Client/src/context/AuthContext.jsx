@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest} from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest} from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -17,6 +17,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [machine, setMachine] = useState(null)
+    const [requestState, setRequestState] = useState (true)
+    const [userState, setUserState] = useState(true)
     const [getUser, setgetUser] = useState(null)
     const [getRequests, setGetRequests] = useState(null)
     const [getRequestsUser, setGetRequestsUser] = useState(null)
@@ -81,28 +83,25 @@ export const AuthProvider = ({ children }) => {
         //PETICION PARA ACEPTAR PETICIONES
         const acceptRequest = async (id) =>{
             try {
-                await AddMachineRequest(id)
-                window.location.reload()
-                window.alert('peticion aceptada exitosamente')
+                if(userState)
+                {
+                    await AcceptRequestRequest(id)
+                    window.alert('peticion aceptada exitosamente')
+                    window.location.reload()
+                    setRequestState(false)
+                }
+                else{
+                    console.log(userState)
+                    window.alert('Debes poner en activo tu perfil para poder aceptar peticiones')
+                }
             } catch (error) {
                 console.log((error))
             }
         }
 
-   // PETICION PARA OBTENER TALLERES
-    // const getTalleres = async () => {
-    //     try {
-    //         const res = await GetTalleresRequest()
-    //         setGetTaller(res.data)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // }
-
     //PETICION PARA AGREGAR MAQUINAS
     const AddMachine = async (machine) =>{
-        try {
+        try {  
             const res = await AddMachineRequest (machine)
             setMachine(res.data)
             window.location.reload()
@@ -136,8 +135,12 @@ export const AuthProvider = ({ children }) => {
 
     //PETICION PARA OBTENER UNA MAQUINA
     const getAMachine = async (id) => {
+        try {
         const res = await GetAMachineRequest(id)
         return res.data
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     //PETICION PARA CREAR UNA PETICION
@@ -210,16 +213,17 @@ export const AuthProvider = ({ children }) => {
     useEffect(()=>{
         async function requests(){
         try {
+            if(requestState){            
             const getRequests = await GetRequestsRequest()
             if(getRequests != null) {
-                setGetRequests(getRequests.data)
-            }
+            setGetRequests(getRequests.data)
+            }}
         } catch (error) {
           console.log(error)
         }
     }
     requests();
-        },[])
+        },[requestState])
 
     //EFFECT PARA OBTENER TODAS LAS PETICIONES POR USUARIO
     useEffect(()=>{
@@ -278,6 +282,15 @@ export const AuthProvider = ({ children }) => {
                 setIsAuthenticathed(true);
                 setUser(res.data);
                 setLoading(false)
+                let x = res.data[0].u_state 
+
+                if(x != 'Activo')
+                    {
+                        setUserState(false)
+                    }
+                    else{
+                        setUserState(true) 
+                    }
             } catch (error) {
                 setIsAuthenticathed(false)
                 setUser(null)
@@ -296,6 +309,7 @@ export const AuthProvider = ({ children }) => {
             logout,
             getUser,
             userType,
+            userState,
             user,
             acceptRequest,
             getTaller,
@@ -310,6 +324,7 @@ export const AuthProvider = ({ children }) => {
             AddRequest,
             getRequests,
             DeletRequest,
+            requestState,
             getRequestsUser,
 
             isAuthenticathed,

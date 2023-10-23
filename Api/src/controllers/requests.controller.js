@@ -43,6 +43,20 @@ export const getRequestsUser = async (req,res) => {
         console.log(error)
     }
 }
+
+export const getRequestsUserAcepted = async (req,res) => {
+    const id_user = req.user._id
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .input('id_user', sql.Int, id_user)
+        .query(requestsQueries.getRequestsUserAcepted)
+        res.json(results.recordset)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const getRequest = async (req,res) => {
     const id_user = req.user._id
     const id = req.params

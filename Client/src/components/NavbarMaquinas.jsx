@@ -12,18 +12,17 @@ const NavbarMaquinas = () => {
   return (
   <>
       <nav className="navbar row navbar-expand-lg" style={{backgroundColor: '#12245f'}}>
-        <div className='contaner-fluid'>
-              <div className="nav-item h-auto  aling-content-center col-5 text-center float-start">
-                  {/* <img className="img-thumbnail" style={{borderRadius: '10%', width: '100px'}}    src="../images/download.png" alt=""/> */}
-              </div>
+      
+        <div className='d-flex'>
+        <h1 className='text-light p-3 '>Registro de maquinas</h1>
               {/*ABRE OPCIONES DEL NAVBAR*/} 
               <button className="navbar-toggler" style={{color: "white", border: "none"}} type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <i className="bi bi-filter-square-fill" style={{width: '100%'}}></i>
               </button>
               <div className="collapse navbar-collapse position-relative " style={{justifyContent: 'end'}} id="navbarNavDropdown">
-                    <ul className="navbar-nav d-flex" style={{justifyContent: 'center', alignItems:'center'}}>
+                    <ul className="navbar-nav " style={{justifyContent: 'center', alignItems:'center'}}>
                       <li className='nav-item'>
-                        <Link className='text-colapse text-center' to="/taller-inicio">Volver</Link>
+                        <Link className='list-item text-wrap text-center' to="/taller-inicio">Volver</Link>
                       </li>
                       <li className='nav-item'>
                         <button className='list-item text-wrap text-center'  type="button" data-bs-toggle="modal" data-bs-target="#registroMaquinas">Registrar nueva maquina
@@ -73,14 +72,16 @@ const NavbarMaquinas = () => {
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">Imagen</label>
                                             <input type="file" className="form-control" {...register("no", {required: false})} autoComplete="off" placeholder="ingrese una imagen de la maquina"/>
-                                          </div>        
-                                          <button type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
+                                          </div>  
+                                            <div className='d-flex  gap-2  justify-content-center'>
+                                            <div className="d-grid gap-2 d-md-block">   
+                                              <button type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
+                                            </div>   
+                                            <div className="d-grid gap-2 d-md-block">
+                                              <button className="btn btn-danger"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
+                                            </div>
+                                          </div>
                                       </form> 
-                                    </div>
-                                    <div className="modal-footer justify-content-center">
-                                      <div className="d-grid gap-2 d-md-block">
-                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
-                                      </div>
                                     </div>
                                   </div>
                                 </div>

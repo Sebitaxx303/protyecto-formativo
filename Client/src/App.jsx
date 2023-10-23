@@ -13,6 +13,7 @@ import EmpresaInicio from './pages/EmpresaInicio'
 import EmpresaPerfil from './pages/EmpresaPerfil'
 import EmpresaPeticiones from './pages/EmpresaPeticiones'
 import HistorialPeticiones from './pages/HistorialPeticiones'
+import PostulacionesTaller from './pages/postulacionestaller'
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
                 <Route path='/empresa-inicio' element={<EmpresaInicio/>}/>
                 <Route path='/empresa-perfil' element={<EmpresaPerfil/>}/>
                 <Route path='/empresa-peticiones' element={<EmpresaPeticiones/>}/>
+                <Route path='/empresa-postulaciones' element={<PostulacionesTaller/>}/>
               </Route>
             </Route>
 

@@ -41,5 +41,7 @@ export const GetRequestsRequest = () => axios.get('/get-requests')
 
 export const GetRequestsUserRequest = () => axios.get('/get-requests-user')
 
+export const GetRequestsUserAcceptedRequest = () => axios.get('/get-requests-user-acepted')
+
 export const DeleteRequestRequest = (id) => axios.delete(`/delete-request/${id}`)
 

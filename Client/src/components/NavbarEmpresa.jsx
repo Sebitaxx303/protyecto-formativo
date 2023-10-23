@@ -11,10 +11,10 @@ const NavbarEmpresa = () => {
   return (
     <>
         {/*ABRE NAVBAR TALLER*/}
-        <nav className="navbar navbar-expand-lg container-fluid d-flex" style={{backgroundColor: '#12245f'}}>
+        <nav className="navbar navbar-expand-lg container-fluid d-flex position-static" style={{backgroundColor: '#12245f'}}>
             
                 <div className="d-flex container-fluid">
-                  <h1 className="text-light">Inicio</h1>
+                  <h1 className="text-light p-3">Inicio</h1>
                     <div className="nav-item h-auto col-2 position-relative text-center">
                     {/* <img className="img-thumbnail" style={{borderRadius: '100%', width: '100px'}} src="../images/download.png" alt=""/>  */}
                     </div>
@@ -26,6 +26,9 @@ const NavbarEmpresa = () => {
                                 <ul className="navbar-nav d-flex" style={{justifyContent: 'center', alignItems:'center'}}  id="menu">
                                     <li className="nav-item ">
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#registropeticion" className="text-wrap text-center">Iniciar una peticion</button>
+                                    </li>
+                                    <li className="nav-item ">
+                                        <Link to={'/empresa-postulaciones'} className="text-wrap text-center">Consultar postulaciones</Link>
                                     </li>
                                 {/*ABRE MODAL DE REGSITRO DE MAQUINA*/} 
                                 <div className="modal fade" id="registropeticion" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -46,7 +49,7 @@ const NavbarEmpresa = () => {
                                       <form onSubmit={sexo}>    
                                       
                                       <div className="mb-3">
-                                          <label>Tipo de maquina</label>
+                                          <label>Tipo de peticion</label>
                                           <select className="form-control" {...register("request_type", {required: true})} placeholder="Ingrese su tipo de peticion">
                                             <option>acabados</option>
                                             <option>hilatura</option>
@@ -69,13 +72,11 @@ const NavbarEmpresa = () => {
                                             <label htmlFor="" className="form-label">cantidad</label>
                                             <input type="number" className="form-control" {...register("amount", {required: false})} aria-describedby="emailHelp"placeholder="Ingrese una cantidad" autoComplete="off"/>
                                           </div>   
-                                          <button type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
+                                          <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="submit"  className="btn btn-sm text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
+                                            <button className="btn btn-danger btn-sm "  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
+                                          </div>
                                       </form> 
-                                    </div>
-                                    <div className="modal-footer justify-content-center">
-                                      <div className="d-grid gap-2 d-md-block">
-                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
-                                      </div>
                                     </div>
                                   </div>
                                 </div>

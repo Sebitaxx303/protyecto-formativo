@@ -3,11 +3,12 @@ import NavbarTaller from "../components/NavbarTaller"
 import { useAuth } from "../context/AuthContext"
 
 const InicioTaller = () => {
-const { getRequests, acceptRequest } = useAuth()
+const { getRequests, acceptRequest  } = useAuth()
 
 // useEffect(()=> {
 //   window.alert('Debes poner en activo tu estado en la aplicacion')
 // },[])
+
   return (
         <>
         <NavbarTaller/>
@@ -18,6 +19,7 @@ const { getRequests, acceptRequest } = useAuth()
                     <h1 className="text-light">Peticiones de confeccion</h1>
                         {getRequests != null ?
                           getRequests.map((request) => (
+
                             <div className="d-flex flex-row justify-content-around bg-light mt-4 rounded-2 "style={{border: 'solid black 1px'}} key={request.id}>
                               <div>
                                 <div className="p-2">
@@ -51,7 +53,9 @@ const { getRequests, acceptRequest } = useAuth()
                                   <p>{request.description}</p>
                                 </div>
                               </div>
-                              <button onClick={() => acceptRequest(request.id)}  > aceptar peticion</button>
+                              <div className="p-2">
+                                <button className="btn btn-sm btn-primary mt-3" onClick={() => acceptRequest(request.id)}> aceptar peticion</button>
+                              </div>
                             </div>
                             
                           )):

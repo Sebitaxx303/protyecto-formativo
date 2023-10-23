@@ -9,7 +9,6 @@ const PerfilTaller = () => {
   const { getUser } = useAuth();
   const onSubmitedUp = handleSubmit( async (values) => {
     update(values); 
-    window.location.reload()
   })
     return(
         <>

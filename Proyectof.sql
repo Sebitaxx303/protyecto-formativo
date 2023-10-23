@@ -4,7 +4,7 @@ use solctext
 go ----------------------------------------------
 create table taller_availability(
     id int identity(1,1),
-    u_state varchar(30) default 'Inactivo' primary key
+    u_state varchar(30) primary key
 )
 go ----------------------------------------------
 insert into taller_availability (u_state) VALUES ('Activo'), ('Inactivo')

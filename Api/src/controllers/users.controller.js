@@ -67,7 +67,7 @@ export const Update = async (req,res) => {
     if(!id) return res.status(400).json({message: 'No estas autorizado'})
     try {
         const pool = await getConnection();
-        pool.request()
+         const results = await pool.request()
         .input('id', sql.Int, id)
         .input("manager_name", sql.VarChar, manager_name)
         .input("company_name", sql.VarChar, company_name)
@@ -76,7 +76,7 @@ export const Update = async (req,res) => {
         .input("phone_number", sql.VarChar, phone_number)
         .input("u_state", sql.VarChar, u_state)
         .query(userQueries.update)
-        res.json({message: 'Datos actualizados'})
+        res.json(results.recordset)
     } catch (error) {
         res.status(500).json({ message: error.message});
     }
@@ -105,7 +105,7 @@ export const VerifyToken = async (req,res) => {
         if(!results) return res.status(401).json({message: 'No estas autorizado'})
 
         return res.json(
-            results.recordsets
+            results.recordset
         )
     })
 }
@@ -171,5 +171,5 @@ export const acceptRequest = async (req,res) => {
         res.json(results)
      } catch (error) {
         console.log(error)
-     }
+     } 
 }
