@@ -7,13 +7,14 @@ import { createTokenAccess } from "../libs/jwt.js";
 import app from "../app.js";
 
 export const register = async (req,res) =>{
-    const {user_type, company_name, rut, u_address, phone_number, email, u_password} = req.body
+    const {manager_name, user_type, company_name, rut, u_address, phone_number, email, u_password} = req.body
     try {
         const passwordHashed = await bcrypt.hash(u_password,10)
         const pool = await getConnection();
         const results = await pool
         .request()
         .input("user_type", sql.VarChar, user_type)
+        .input("manager_name", sql.VarChar, manager_name)
         .input("company_name", sql.VarChar, company_name)
         .input("rut", sql.VarChar, rut)
         .input("u_address", sql.VarChar, u_address)
@@ -60,7 +61,7 @@ export const login = async (req,res) => {
 }
 
 export const Update = async (req,res) => {
-    const {company_name, rut, u_address, phone_number} = req.body
+    const {manager_name, company_name, rut, u_address, phone_number ,u_state} = req.body
     const id = req.user._id
     console.log(id)
     if(!id) return res.status(400).json({message: 'No estas autorizado'})
@@ -68,10 +69,12 @@ export const Update = async (req,res) => {
         const pool = await getConnection();
         pool.request()
         .input('id', sql.Int, id)
+        .input("manager_name", sql.VarChar, manager_name)
         .input("company_name", sql.VarChar, company_name)
         .input("rut", sql.VarChar, rut)
         .input("u_address", sql.VarChar, u_address)
         .input("phone_number", sql.VarChar, phone_number)
+        .input("u_state", sql.VarChar, u_state)
         .query(userQueries.update)
         res.json({message: 'Datos actualizados'})
     } catch (error) {
@@ -130,6 +133,28 @@ export const userType = async(req,res) =>{
         res.json(results.recordset[0].user_type)
         console.log(results.recordset[0].user_type)
     } catch (error) {
-        
+        console.log(error)
+    }
+}
+
+export const talleres = async (req,res) => {
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .query(userQueries.talleres)
+        res.json(results.recordset)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const empresas = async (req,res) => {
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .query(userQueries.empresas)
+        res.json(results.recordset)
+    } catch (error) {
+        console.log(error)
     }
 }

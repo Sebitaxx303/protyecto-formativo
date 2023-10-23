@@ -2,15 +2,17 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { useForm } from "react-hook-form"
 
-const PerfilTaller = () => {
-  const { register, handleSubmit, formState:{errors}  } = useForm();
-  const { update, errors: RegisterErrors } = useAuth();
-  const { logout } = useAuth();
-  const { getUser } = useAuth();
-  const onSubmitedUp = handleSubmit( async (values) => {
-    update(values); 
-    window.location.reload()
-  })
+
+const EmpresaPerfil = () => {
+    const { register, handleSubmit, formState:{errors}  } = useForm();
+    const {  update, errors: RegisterErrors } = useAuth();
+    const { logout } = useAuth();
+    const { getUser } = useAuth();
+
+    const onSubmitedUp = handleSubmit( async (values) => {
+      update(values); 
+      window.location.reload()
+    })
     return(
         <>
         {
@@ -38,15 +40,16 @@ const PerfilTaller = () => {
                   </div>
                   {/**SE CIERRA SECCION DE FOTO DE PERFIL DE USUATIO*/}  
                   {/**SE ABRE SECCION DE INFORMACION DEL TALLER*/} 
-                  <div className='container rounded ' style={{ marginTop:'20rem' ,width: '50%', border: '2px solid #12245f',    backgroundColor: 'white', height: 'auto'}}>    
+                  <div className='container rounded ' style={{ marginTop:'20rem' ,width: '50%', border: '2px solid #12245f',    backgroundColor: 'rgba(165, 148, 148)', height: 'auto'}}>    
                     {/**SE ABRE SECCION DE NOMBRE DEL TALLER*/} 
                       <div>
-                   <div className=" text-center mt-3"> 
+                   <div className=" text-center mt-3">
                    </div>
                    <div className="container-fluid">
                       <div className="d-grid col-6 mx-auto">
                         <button className='btn btn-primary' data-bs-target="#modalActualizacionUsuario"   data-bs-toggle="modal">Editar perfil
                         </button>
+                        
                         <div className="modal fade" id="modalActualizacionUsuario" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-scrollable">
                                   <div className="modal-content" style={{border: 'Solid'}}>
@@ -63,15 +66,14 @@ const PerfilTaller = () => {
                                       ))
                                     }
                                       <form onSubmit={onSubmitedUp}>    
-
+                                      
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">Nombre del encargado</label>
                                             <input type="text" className="form-control" {...register("manager_name", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese el nombre del encargado" autoComplete="off"/>
                                           </div>        
                                           {
                                             errors.manager_name && <p className='text-danger'>El nombre del encargado es obligatorio</p>
-                                          }                                
-
+                                          }       
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">Nombre de la entidad</label>
                                             <input type="text" className="form-control" {...register("company_name", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese el nombre de la entidad" autoComplete="off"/>
@@ -97,12 +99,6 @@ const PerfilTaller = () => {
                                               <label htmlFor="exampleInputPassword1" className="form-label">Numero de telefono</label>
                                               <input type="number" className="form-control" {...register("phone_number", {required: true})} autoComplete="off" placeholder="Ingrese su número telefonico"/>
                                           </div> 
-                                          <div className="mb-3">
-                                          <select className="form-control" {...register("u_state", {required: true})} placeholder="Ingrese el estado de su perfil">
-                                            <option>Activo</option>
-                                            <option>Inactivo</option>
-                                          </select>
-                                          </div>
  
                                           <button type="submit"  className="btn text-light" style={{backgroundColor: '#1db0c0'}}>Actualizar</button>
                                       </form> 
@@ -129,13 +125,10 @@ const PerfilTaller = () => {
                             <div className='col-6 text-end'>A cargo:</div> 
                             <div className='col-6 text-start'>{user.manager_name}</div> 
                           </li>
+                          
                           <li className="row align-items-center">
                             <div className='col-6 text-end'>tipo de usuario:</div> 
                             <div className='col-6 text-start'>{user.user_type}</div> 
-                          </li>
-                          <li className="row align-items-center">
-                            <div className='col-6 text-end'>Estado del usuario:</div> 
-                            <div className='col-6 text-start'>{user.u_state}</div> 
                           </li>
                           <li className="row align-items-center">
                             <div className='col-6 text-end'>Fecha de creacion:</div> 
@@ -161,6 +154,8 @@ const PerfilTaller = () => {
             </footer> */}
             {/**SE CIERRA EL FOOTER*/}         
         </>
-    )
+
+  )
 }
-export default PerfilTaller
+
+export default EmpresaPerfil

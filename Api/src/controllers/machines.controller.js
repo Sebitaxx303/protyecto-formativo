@@ -16,7 +16,7 @@ export const addMachine = async (req,res) => {
         res.status(200).json({message: 'se registro la maquina de manera exitosa'})
         } catch (error) {
         res.status(500).json({error})
-    }
+    } 
 
 }
 export const getMachines= async (req,res) => {
@@ -33,9 +33,9 @@ export const getMachines= async (req,res) => {
 }
 export const getMachine= async (req,res) => {
     const id_user = req.user._id
-    const {id_machine} = req.body
+    const {id_machine} = req.params
     try {
-        const pool = await getConnection();
+        const pool = await getConnection(); 
         const results = await pool.request()
         .input("id_user",sql.Int,id_user)
         .input("id_machine",sql.Int,id_machine)
@@ -47,7 +47,8 @@ export const getMachine= async (req,res) => {
 }
 export const updateMachine = async (req,res) => {
     const id_user = req.user._id
-    const { id_machine, machine_type, mach_description, photo } = req.body
+    const { id_machine } = req.params
+    const { machine_type, mach_description, photo } = req.body
     try {
         const pool = await getConnection();
         const results = await pool.request()

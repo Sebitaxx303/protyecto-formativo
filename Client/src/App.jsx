@@ -10,6 +10,8 @@ import TallerMaquinas from './pages/TallerMaquinas'
 import TallerRoutes from './TallerRoutes'
 import EmpresaRoutes from './EmpresaRoutes'
 import EmpresaInicio from './pages/EmpresaInicio'
+import EmpresaPerfil from './pages/EmpresaPerfil'
+import EmpresaPeticiones from './pages/EmpresaPeticiones'
 
 const App = () => {
   return (
@@ -28,6 +30,8 @@ const App = () => {
               </Route>
               <Route element={<EmpresaRoutes/>}>
                 <Route path='/empresa-inicio' element={<EmpresaInicio/>}/>
+                <Route path='/empresa-perfil' element={<EmpresaPerfil/>}/>
+                <Route path='/empresa-peticiones' element={<EmpresaPeticiones/>}/>
               </Route>
             </Route>
 

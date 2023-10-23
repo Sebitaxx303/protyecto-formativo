@@ -10,8 +10,8 @@ const router = new Router();
 
 router.post('/add-machine', requiredAuth ,addMachine)
 router.get('/get-machines', requiredAuth, getMachines)
-router.get('/get-machine', requiredAuth, getMachine)
-router.put('/update-machine', requiredAuth, updateMachine)
+router.get('/get-machine/:id_machine', requiredAuth, getMachine)
+router.put('/update-machine/:id_machine', requiredAuth, updateMachine)
 router.delete('/delete-machine/:id_machine',requiredAuth, deleteMachine)
 
 

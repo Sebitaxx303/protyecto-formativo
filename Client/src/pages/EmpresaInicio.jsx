@@ -1,79 +1,55 @@
+
+import { useEffect } from "react"
 import NavbarEmpresa from "../components/NavbarEmpresa"
+import { useAuth } from "../context/AuthContext"
+
 
 const EmpresaInicio = () => {
+   
+  const { getTaller } = useAuth()
+
+  useEffect(()=> {
+    window.alert('Debes poner en activo tu esdo en la aplicacion')
+  })
+
   return (
       <>
         <NavbarEmpresa/>
           <div className="container">
-          <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'35rem', backgroundColor: '#5120d4'}}>
+          <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'auto', backgroundColor: '#5120d4'}}>
               <div className="container-fluid mt-1">
                   <div className="container text-center text-light">
-                  <h1>Publicaciones de confección</h1>
+                  <h1>Talleres de confeccion disponibles</h1>
+                    { getTaller !== null ?
+                      getTaller.map((taller) => (
+                        <div  key={taller.id}>
+                          <table style={{height: '35vh'}} className="table mt-4  text-center container-fluid">
+                            <thead >
+                              <tr>
+                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Encargado</th>
+                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Nombre del taller</th>
+                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Direccion del taller</th>
+                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Nmero de contacto</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{taller.manager_name}</td>
+                                <td>{taller.company_name}</td>
+                                <td>{taller.u_address}</td>
+                                <td>{taller.phone_number}</td>
+                              </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                      )):
+                      <div>
+                        <h1>no hay nada</h1>
+                      </div>
+                    }
                   </div>
                   <div className="container bg-secondary bg-opacity-75 ">
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                              <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                              <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <a href="a"><img className="img-thumbnail m-1" src="../images/download.png" alt=""/></a>
-                              <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                              <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                              <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                              <a className="text-dark text-decoration-none"href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
-                      <div className="row border-bottom border-light align-items-center">
-                          <div className="col-4">
-                              <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                              <a className="text-dark text-decoration-none"href="a">ir a perfil de sebas</a>
-                          </div>
-                          <div className="col-8">
-                              <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                          </div>
-                      </div>
+
                   </div>
               </div> 
               </div>

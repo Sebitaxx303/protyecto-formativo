@@ -1,83 +1,64 @@
+import { useEffect } from "react"
 import NavbarTaller from "../components/NavbarTaller"
-
+import { useAuth } from "../context/AuthContext"
 
 const InicioTaller = () => {
+const { getRequests } = useAuth()
+
+useEffect(()=> {
+  window.alert('Debes poner en activo tu estado en la aplicacion')
+},[])
   return (
         <>
         <NavbarTaller/>
         
             <div className="container" >
-            <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'35rem', backgroundColor: '#5120d4'}}>
-                <div className="container-fluid mt-1">
-                    <div className="container text-center text-light">
-                    <h1>Publicaciones de confección</h1>
-                    </div>
-                    <div className="container bg-secondary bg-opacity-75 ">
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                                <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
+                <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'auto', backgroundColor: '#5120d4'}}>
+                    <div className="container-fluid mt-1">
+                    <h1 className="text-light">Peticiones de confeccion</h1>
+                        {getRequests != null ?
+                          getRequests.map((request) => (
+                            <div className="d-flex flex-row justify-content-around bg-light mt-4 rounded-2 "style={{border: 'solid black 1px'}} key={request.id}>
+                              <div>
+                                <div className="p-2">
+                                    <h5>Id de peticion</h5>
+                                </div>
+                                <div className="p-2">
+                                  <p>{request.id}</p>
+                                </div>
+                              </div>
+                              <div className="p-2">
+                                <div >
+                                    <h5>Tipo de peticion</h5>
+                                </div>
+                                <div>
+                                  <p>{request.request_type}</p>
+                                </div>
+                              </div>
+                              <div className="p-2">
+                                <div>
+                                    <h5>Fecha de publicacion</h5>
+                                </div>
+                                <div>
+                                  <p>{request.start_date}</p>
+                                </div>
+                              </div>
+                              <div className="p-2">
+                                <div>
+                                    <h5>descricion</h5>
+                                </div>
+                                <div >
+                                  <p>{request.description}</p>
+                                </div>
+                              </div>
+
                             </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                                <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                            </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <a href="a"><img className="img-thumbnail m-1" src="../images/download.png" alt=""/></a>
-                                <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                            </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                                <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                            </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                                <a className="text-dark text-decoration-none" href="a">ir a perfil de sebas</a>
-                            </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                                <a className="text-dark text-decoration-none"href="a">ir a perfil de sebas</a>
-                            </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                        <div className="row border-bottom border-light align-items-center">
-                            <div className="col-4">
-                                <img className="img-thumbnail m-1" src="../images/download.png" alt=""/>
-                                <a className="text-dark text-decoration-none"href="a">ir a perfil de sebas</a>
-                            </div>
-                            <div className="col-8">
-                                <span>pedido hehco por sebastian, en la fecha 20/12/2013</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
+                          )):
+                          <div>
+                            <h1>no hay peticiones</h1>
+                          </div>
+                        }
+                    </div> 
                 </div>
             </div>
           {/*ABRE FOOTER*/} 

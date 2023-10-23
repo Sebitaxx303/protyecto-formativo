@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
-
-
+import { useForm  } from "react-hook-form"
 const NavbarEmpresa = () => {
-    const { logout } = useAuth();
+    const { logout, AddRequest, errors: RegisterErrors  } = useAuth();
+    const { register, handleSubmit, formState:{errors} } = useForm()
+
+    const sexo = handleSubmit( async (data) =>{
+        AddRequest(data)
+    })
   return (
     <>
         {/*ABRE NAVBAR TALLER*/}
-        <nav className="navbar navbar-expand-lg container-fluid z-2 d-flex" style={{backgroundColor: '#12245f'}}>
+        <nav className="navbar navbar-expand-lg container-fluid d-flex" style={{backgroundColor: '#12245f'}}>
             
-                <div className="container-fluid">
+                <div className="d-flex container-fluid">
+                  <h1 className="text-light">Inicio</h1>
                     <div className="nav-item h-auto col-2 position-relative text-center">
                     {/* <img className="img-thumbnail" style={{borderRadius: '100%', width: '100px'}} src="../images/download.png" alt=""/>  */}
                     </div>
@@ -20,19 +25,70 @@ const NavbarEmpresa = () => {
                             <div id="menu" style={{width:'100%', display: 'flex'}} >
                                 <ul className="navbar-nav d-flex" style={{justifyContent: 'center', alignItems:'center'}}  id="menu">
                                     <li className="nav-item ">
-                                        <Link className="text-wrap text-center"to="/HistorialPeticiones">Historial de peticiones</Link>
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#registropeticion" className="text-wrap text-center">Iniciar una peticion</button>
                                     </li>
-                                    <li className="nav-item">
-                                        <button type="button"><Link className="text-wrap text-center" to="/taller-maquinas">Registrar maquinas</Link></button>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link className="text-wrap text-center"to="/RegistroCalificaciones">Registro de calificaciones</Link>
+                                {/*ABRE MODAL DE REGSITRO DE MAQUINA*/} 
+                                <div className="modal fade" id="registropeticion" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-dialog-scrollable">
+                                  <div className="modal-content" style={{border: 'Solid'}}>
+                                    <div className="modal-header">
+                                      <h1 className="modal-title fs-5"  id="exampleModalLabel">Registrar peticion</h1>
+                                      <button type="button" className="btn-close"   data-bs-dismiss="modal" aria-label="Close"></ button>
+                                    </div>
+                                    <div className="modal-body">
+                                    {
+                                      RegisterErrors.map((error, i)=> (
+                                        <div className='bg-danger' key={i}>
+                                          {error}
+                                          </div>
+                                      ))
+                                    }
+                                      <form onSubmit={sexo}>    
+                                      
+                                      <div className="mb-3">
+                                          <label>Tipo de maquina</label>
+                                          <select className="form-control" {...register("request_type", {required: true})} placeholder="Ingrese su tipo de peticion">
+                                            <option>acabados</option>
+                                            <option>hilatura</option>
+                                            <option>tejeduria</option>
+                                            <option>tintura</option>
+                                          </select>
+                                        </div>
+                                          {
+                                            errors.request_type && <p className='text-danger'>El tipo de peticion es obligatoria</p>
+                                          }
+
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">descripción</label>
+                                            <input type="text" className="form-control" {...register("description", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese una descripcion de la maquina" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.description && <p className='text-danger'>la descripcion es obligatoria</p>
+                                          }    
+                                        <div className="mb-3">
+                                            <label htmlFor="" className="form-label">cantidad</label>
+                                            <input type="number" className="form-control" {...register("amount", {required: false})} aria-describedby="emailHelp"placeholder="Ingrese una cantidad" autoComplete="off"/>
+                                          </div>   
+                                          <button type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
+                                      </form> 
+                                    </div>
+                                    <div className="modal-footer justify-content-center">
+                                      <div className="d-grid gap-2 d-md-block">
+                                        <button className="btn btn-danger btn-sm"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                </div> 
+                                {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
+                                    <li className="nav-item ">
+                                        <Link to={'/empresa-peticiones'} className="text-wrap text-center">Consultar peticiones iniciadas</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="text-colapse text-center" to="#">Opciones de  usuario</Link> 
                                         <ul className="dropdown-menu">
                                         <li className="dropdown-item">
-                                            <Link className="text-wrap text-center" to="/taller-perfil">Informacion de la cuenta</Link>
+                                            <Link className="text-wrap text-center" to="/empresa-perfil">Informacion de la cuenta</Link>
                                         </li>
                                         <li className="dropdown-item"  onClick={logout}>
                                             <Link className="text-wrap text-center">Cerrar sesión</Link>

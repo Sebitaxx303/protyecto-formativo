@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest } from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest} from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -18,11 +18,15 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [machine, setMachine] = useState(null)
     const [getUser, setgetUser] = useState(null)
+    const [getRequests, setGetRequests] = useState(null)
+    const [getRequestsUser, setGetRequestsUser] = useState(null)
+    const [getTaller, setGetTaller] = useState(null)
     const [getMachine, setGetMachine] = useState(null)
     const [userType, setUserType] = useState(null)
     const [isAuthenticathed, setIsAuthenticathed] = useState(false);
     const [errors , setErrors] = useState([]);
     const [loading, setLoading] = useState(true);
+
 
     //PETICION PARA REGISTRO DE USUARIOS
     const signup = async (user)=> {
@@ -36,7 +40,7 @@ export const AuthProvider = ({ children }) => {
             console.log((error))
         }
     }
-
+    //PETICION PARA INICIO DE SESION
     const signin = async (user) => {
         try {
             const res = await LoginRequest(user);
@@ -51,7 +55,7 @@ export const AuthProvider = ({ children }) => {
             setErrors([error.response.data.message]);
         }
     }
-
+    //PETICION PARA ACTUALIZACION DE DATOS DE USUARIO
     const update = async (user)=> {
         try {
             const res = await UpdateRequest (user)
@@ -63,6 +67,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    //PETICION PARA CERRAR SESION
     const logout = async () => {
         try {
             await LogoutRequest();
@@ -73,6 +78,18 @@ export const AuthProvider = ({ children }) => {
         
     }
 
+   // PETICION PARA OBTENER TALLERES
+    // const getTalleres = async () => {
+    //     try {
+    //         const res = await GetTalleresRequest()
+    //         setGetTaller(res.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+
+    // }
+
+    //PETICION PARA AGREGAR MAQUINAS
     const AddMachine = async (machine) =>{
         try {
             const res = await AddMachineRequest (machine)
@@ -84,11 +101,10 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const UpdateMachine = async (id,machine)=>{
+    //PETICION PARA ACTUALIZAR MAQUINAS
+    const UpdateMachine = async (id, machine) => {
         try {
-            const res = await UpdateMachineRequest(id,machine)
-            setMachine(res.data)
-            console.log(res.data)
+            await UpdateMachineRequest(id, machine)
             window.location.reload()
         } catch (error) {
             setErrors(error.response.data)
@@ -96,6 +112,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    //PETICION PARA ELIMINAR MAQUINAS
     const DeleteMachine = async (id) => {
         try {
             await DeleteMachineRequest(id)
@@ -105,6 +122,37 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    //PETICION PARA OBTENER UNA MAQUINA
+    const getAMachine = async (id) => {
+        const res = await GetAMachineRequest(id)
+        return res.data
+    }
+
+    //PETICION PARA CREAR UNA PETICION
+    const AddRequest = async (request) =>{
+        try {
+            const res = await AddRequestRequest(request)
+            console.log(res)
+            window.location.reload()
+        } catch (error) {
+            setErrors(error.response.data)
+            console.log((error))
+        }
+    }
+
+    //PETICION PARA ELIMINAR MAQUINAS
+    const DeletRequest = async (id) => {
+        try {
+            await DeleteRequestRequest(id)
+            console.log(id)
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+ 
+    //EFFECT PARA OBTENER EL TIPO DE USUARIO
     useEffect(()=> {
         async function getType(){
             try {
@@ -118,6 +166,7 @@ export const AuthProvider = ({ children }) => {
         getType()
     },[])
 
+    //EFFECT PARA OBTENER LOS USUARIOS
     useEffect(()=>{
         async function getUsers(){
         try {
@@ -128,7 +177,9 @@ export const AuthProvider = ({ children }) => {
         }
     }
     getUsers();
-      },[])
+    },[])
+
+    //EFFECT PARA OBTENER TODAS LAS MAQUINAS
     useEffect(()=>{
     async function machines(){
     try {
@@ -141,8 +192,54 @@ export const AuthProvider = ({ children }) => {
     }
 }
  machines();
-  },[])
+    },[])
+
+    
+    //EFFECT PARA OBTENER TODAS LAS PETICIONES
+    useEffect(()=>{
+        async function requests(){
+        try {
+            const getRequests = await GetRequestsRequest()
+            if(getRequests != null) {
+                setGetRequests(getRequests.data)
+            }
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    requests();
+        },[])
+
+    //EFFECT PARA OBTENER TODAS LAS PETICIONES POR USUARIO
+    useEffect(()=>{
+        async function requestsUser(){
+        try {
+            const getRequests = await GetRequestsUserRequest()
+            if(getRequests != null) {
+                setGetRequestsUser(getRequests.data)
+            }
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    requestsUser();
+        },[])
+
+    useEffect( () => {
+        async function talleres(){
+            try {
+                const getTalleres = await GetTalleresRequest()
+                if(getTalleres != null){
+                setGetTaller(getTalleres.data)
+            }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        talleres()
+    },[])
   
+    //EFFECT PARA LOS ERRORES
     useEffect(() => {
         if(errors.length > 0){
             const timer = setTimeout(() => {
@@ -152,6 +249,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, [errors])
 
+    //EFFECT PARA LA VALIDACION DEL USUARIO
     useEffect (() => {
         async function checkLogin() {
             const cookies = Cookies.get();
@@ -177,20 +275,31 @@ export const AuthProvider = ({ children }) => {
         }
         checkLogin();
     },[])
+
+
     return(
         <AuthContext.Provider value={{
             signup,
             signin,
             update,
             logout,
-            UpdateMachine,
-            AddMachine,
             getUser,
             userType,
+            user,
+            getTaller,
+
+            UpdateMachine,
+            AddMachine,
+            getAMachine,
             machine,
             getMachine,
             DeleteMachine,
-            user, 
+            
+            AddRequest,
+            getRequests,
+            DeletRequest,
+            getRequestsUser,
+
             isAuthenticathed,
             errors,
             loading

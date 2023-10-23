@@ -19,7 +19,7 @@ const Inicio = () =>{
         <>
           {/* NAV BAR PRINCIPAL DE INICIO */}
           <Navbarinic/>
-          {/*ABRE MODAL DE REGSITRO DE TALLER*/} 
+          {/*ABRE MODAL DE REGSITRO DE USUARIO*/} 
           <div className="modal fade" id="modalRegistroTaller" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-scrollable">
                                   <div className="modal-content" style={{border: 'Solid'}}>
@@ -39,13 +39,23 @@ const Inicio = () =>{
                                       
                                       <div className="mb-3">
                                           <label>Tipo de usuario</label>
-                                          <select className="form-control" {...register("user_type", {required: true})} placeholder="Ingrese su tipo de usuario">
+                                          <select id="usertype" className="form-control" {...register("user_type", {required: true})} placeholder="Ingrese su tipo de usuario">
                                             <option>taller</option>
                                             <option>empresa</option>
                                           </select>
                                         </div>
+                                        {
+ 
+                                        }
                                           {
                                             errors.user_type && <p className='text-danger'>El tipo de usuario es obligatorio</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">Nombre del encargado</label>
+                                            <input type="text" className="form-control" {...register("manager_name", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese el nombre del encargado" autoComplete="off"/>
+                                          </div>        
+                                          {
+                                            errors.manager_name && <p className='text-danger'>El nombre del encargado es obligatorio</p>
                                           }
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">Nombre de la entidad</label>
