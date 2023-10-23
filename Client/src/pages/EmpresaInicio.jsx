@@ -8,9 +8,9 @@ const EmpresaInicio = () => {
    
   const { getTaller } = useAuth()
 
-  useEffect(()=> {
-    window.alert('Debes poner en activo tu esdo en la aplicacion')
-  })
+  // useEffect(()=> {
+  //   window.alert('Debes poner en activo tu esdo en la aplicacion')
+  // })
 
   return (
       <>

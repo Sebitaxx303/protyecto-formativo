@@ -65,11 +65,11 @@ const Inicio = () =>{
                                             errors.company_name && <p className='text-danger'>El nombre de la entidad es obligatorio</p>
                                           }
                                           <div className="mb-3">
-                                            <label htmlFor="" className="form-label">RUT</label>
+                                            <label htmlFor="" className="form-label">NIT</label>
                                             <input type="number" className="form-control" {...register("rut", {required: true})} autoComplete="off" placeholder="Ingrese el RUT de la entidad"/>
                                           </div>        
                                           {
-                                            errors.rut && <p className='text-danger'>El RUT es obligatorio</p>
+                                            errors.rut && <p className='text-danger'>El NIT es obligatorio</p>
                                           }
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">direccion</label>

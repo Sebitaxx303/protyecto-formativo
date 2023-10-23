@@ -5,9 +5,9 @@ import { useAuth } from "../context/AuthContext"
 const InicioTaller = () => {
 const { getRequests } = useAuth()
 
-useEffect(()=> {
-  window.alert('Debes poner en activo tu estado en la aplicacion')
-},[])
+// useEffect(()=> {
+//   window.alert('Debes poner en activo tu estado en la aplicacion')
+// },[])
   return (
         <>
         <NavbarTaller/>

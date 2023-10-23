@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }) => {
             const res = await AddMachineRequest (machine)
             setMachine(res.data)
             window.location.reload()
+            window.alert('maquina registrada exitosamente')
         } catch (error) {
             setErrors(error.response.data)
             console.log((error))
