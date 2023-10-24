@@ -63,7 +63,7 @@ const NavbarEmpresa = () => {
 
                                           <div className="mb-3">
                                             <label htmlFor="" className="form-label">descripción</label>
-                                            <input type="text" className="form-control" {...register("description", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese una descripcion de la maquina" autoComplete="off"/>
+                                            <textarea type="text" className="form-control" {...register("description", {required: true})} aria-describedby="emailHelp"placeholder="Ingrese una descripcion de la maquina" autoComplete="off"/>
                                           </div>        
                                           {
                                             errors.description && <p className='text-danger'>la descripcion es obligatoria</p>

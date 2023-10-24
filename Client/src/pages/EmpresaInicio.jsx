@@ -18,27 +18,30 @@ const EmpresaInicio = () => {
           <div className="container">
           <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'auto', backgroundColor: '#5120d4'}}>
               <div className="container-fluid mt-1">
+              <h1 className="text-light">Talleres de confeccion disponibles</h1>
                   <div className="container text-center text-light">
-                  <h1>Talleres de confeccion disponibles</h1>
                     { getTaller !== null ?
                       getTaller.map((taller) => (
-                        <div  key={taller.id}>
-                          <table style={{height: 'auto'}} className="table mt-4  text-center container-fluid">
-                            <thead >
-                              <tr>
-                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Encargado</th>
-                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Nombre del taller</th>
-                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Dirección del taller</th>
-                                <th style={{ backgroundColor: '#12245f'}} className='text-light' scope="col">Número de contacto</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>{taller.manager_name}</td>
-                                <td>{taller.company_name}</td>
-                                <td>{taller.u_address}</td>
-                                <td>{taller.phone_number}</td>
-                                  <button type='button' data-bs-toggle="modal" className=" btn text-light"  data-bs-target="#verperfil" style={{backgroundColor: '#12245f', marginLeft: '10px'}}>ver perfil</button>
+                        <div key={taller.id} className="card mt-4" style={{width: "18rem"}}>
+                            <div className="card-header">
+                              <h2>{taller.company_name}</h2>
+                            </div>
+                          <div className="card-body">
+                            <div className="d-flex justify-content-evenly">
+                              <h6 className="">direccion: </h6>
+                              <p className="">{taller.u_address}</p>
+                            </div>
+                            <div className="d-flex justify-content-evenly">
+                              <h6 className="">numero de contacto: </h6>
+                              <p className="">{taller.phone_number}</p>
+                            </div>
+                            <div className="d-flex justify-content-evenly">
+                              <h6 className="">correo: </h6>
+                              <p className="">{taller.email}</p>
+                            </div>
+                            <button type='button' data-bs-toggle="modal" className=" btn text-light"  data-bs-target="#verperfil" style={{backgroundColor: '#12245f'}}>ver perfil</button>
+                            </div>   
+
                                   {/*ABRE MODAL DE REGSITRO DE MAQUINA*/} 
                                     <div className="modal fade" id="verperfil" tabIndex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <div className="modal-dialog modal-dialog-scrollable">
@@ -83,11 +86,7 @@ const EmpresaInicio = () => {
                                       </div>
                                     </div> 
                                  {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
-                              </tr>
-                              
-                            </tbody>
 
-                            </table>
                         </div>
                       )):
                       <div>

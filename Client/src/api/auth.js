@@ -47,5 +47,7 @@ export const DeleteRequestRequest = (id) => axios.delete(`/delete-request/${id}`
 
 export const DeletePostulationRequest = (id) => axios.delete(`/delete-postulation/${id}`)
 
+export const UpdateRequestRequest = (id, request) => axios.put(`/update-request/${id}`, request)
+
 
 

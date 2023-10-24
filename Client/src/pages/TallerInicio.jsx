@@ -15,48 +15,34 @@ const { getRequests, acceptRequest  } = useAuth()
         
             <div className="container" >
                 <div className="container-fluid rounded-bottom-4 position-relative text-center p-3 border-top-0" style={{height:'auto', backgroundColor: '#5120d4'}}>
-                    <div className="container-fluid mt-1">
-                    <h1 className="text-light">Peticiones de confeccion</h1>
+                   <h1 className="text-light">Peticiones de confeccion</h1>
+                    <div className="container p-2 rounded-bottom-4 d-flex justify-content-evenly flex-wrap p-4 ">
                         {getRequests != null ?
                           getRequests.map((request) => (
-
-                            <div className="d-flex flex-row justify-content-around bg-light mt-4 rounded-2 "style={{border: 'solid black 1px'}} key={request.id}>
-                              <div>
-                                <div className="p-2">
-                                    <h5>Id de peticion</h5>
-                                </div>
-                                <div className="p-2">
-                                  <p>{request.id}</p>
-                                </div>
-                              </div>
-                              <div className="p-2">
-                                <div >
-                                    <h5>Tipo de peticion</h5>
-                                </div>
-                                <div>
-                                  <p>{request.request_type}</p>
-                                </div>
-                              </div>
-                              <div className="p-2">
-                                <div>
-                                    <h5>Fecha de publicacion</h5>
-                                </div>
-                                <div>
-                                  <p>{request.start_date}</p>
-                                </div>
-                              </div>
-                              <div className="p-2">
-                                <div>
-                                    <h5>descricion</h5>
-                                </div>
-                                <div >
-                                  <p>{request.description}</p>
-                                </div>
-                              </div>
-                              <div className="p-2">
-                                <button className="btn btn-sm btn-primary mt-3" onClick={() => acceptRequest(request.id)}> aceptar peticion</button>
-                              </div>
+                            <div key={request.id} className="card mt-4" style={{width: "18rem"}}>
+                            <div className="card-header">
+                              <h2>{request.request_type}</h2>
                             </div>
+                          <div className="card-body">
+                            <div className="d-flex justify-content-evenly">
+                              <h4 className="">Estado: </h4>
+                              <h5 className="">{request.r_state}</h5>
+                            </div>
+                            <div className="d-flex justify-content-evenly">
+                              <h4 className="">Cantidad: </h4>
+                              <h5 className="">{request.amount}</h5>
+                            </div>
+                            <div className="">
+                              <h5 className="">Descripción: </h5>
+                              <p className="">{request.description}</p>
+                            </div>
+                            <div className="p-2">
+                                <button className="btn btn-sm btn-primary mt-3" onClick={() => acceptRequest(request.id)}> aceptar peticion</button>
+                            </div>
+
+                            </div>
+                            </div>   
+
                             
                           )):
                           <div>

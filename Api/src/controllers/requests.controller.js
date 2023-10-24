@@ -72,16 +72,17 @@ export const getRequest = async (req,res) => {
     }
 }
 export const updateRequest = async (req,res) => {
-    const id_user = req.user._id
-    const id = req.params
-    const {  request_type, description, amount} = req.body
+    const id_user_request = req.user._id
+    const { id } = req.params
+    const {  request_type, description, amount, r_state} = req.body
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user_request', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user_request)
         .input('id', sql.Int, id)
         .input('request_type', sql.VarChar, request_type)
         .input('description', sql.NVarChar, description)
+        .input('r_state', sql.NVarChar, r_state)
         .input('amount', sql.Int, amount)
         .query(requestsQueries.updateRequest)
         res.json(results.recordset)

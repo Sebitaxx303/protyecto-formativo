@@ -2,26 +2,11 @@ import NavbarMaquinas from '../components/NavbarMaquinas.jsx'
 
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
-// import { useEffect } from 'react'
 
 const TallerMaquinas = () => {
 
 const {  getMachine, DeleteMachine } = useAuth();
 
-// const navigate = useNavigate()
-// const params = useParams()
-
-// useEffect(() => {
-//   async function loadMachine(){
-//     if(params.id_machine)
-//    {const machine = await getAMachine(params.id_machine)
-//     console.log(machine)
-//     setValue('machine_type', machine.machine_type)
-//     setValue('mach_description', machine.mach_description)
-//   }
-//   }
-//   loadMachine()
-// })
 
 
   return (

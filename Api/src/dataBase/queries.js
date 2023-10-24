@@ -23,7 +23,7 @@ export const requestsQueries = {
     getRequestsUser: 'SELECT * FROM requests WHERE id_user_request = @id_user_request',
     getRequestsUserAcepted: 'SELECT * FROM d_requests_talleres DR  inner join requests R  ON R.id = DR.id_request inner join users U ON U.id = DR.id_user WHERE R.id_user_request = @id_user_request',
     getRequest:  'SELECT * FROM requests WHERE id_user = @id_user AND id = @id',
-    updateRequest: 'UPDATE requests SET request_type = @request_type, description = @description, amount = @amount WHERE id_user_request = @id_user_request AND id = @id',
+    updateRequest: 'UPDATE requests SET request_type = @request_type, r_state = @r_state, description = @description, amount = @amount WHERE id_user_request = @id_user_request AND id = @id',
     deleteRequest: 'DELETE FROM requests WHERE id_user_request = @id_user_request AND id = @id',
     updateRequestState: 'UPDATE requests SET r_state = WHERE id = @id_request',
     deletePostulation: 'DELETE FROM d_requests_talleres WHERE id_d_r_t = @id_d_r_t '

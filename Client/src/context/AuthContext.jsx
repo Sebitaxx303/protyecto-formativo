@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest, GetRequestsUserAcceptedRequest, DeletePostulationRequest} from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest, GetRequestsUserAcceptedRequest, DeletePostulationRequest, UpdateRequestRequest} from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -124,6 +124,19 @@ export const AuthProvider = ({ children }) => {
             console.log((error))
         }
     }
+
+    //PETICION PARA ACTUALIZAR PETICIONES
+    const updateRequest = async (id, request) => {
+        try {
+            await UpdateRequestRequest(id, request)
+            window.alert('la peticion fue actualizada')
+            window.location.reload()
+        } catch (error) {
+            setErrors(error.response.data)
+            console.log((error))
+        }
+    }
+    
 
     //PETICION PARA ACTUALIZAR MAQUINAS
     const UpdateMachine = async (id, machine) => {
@@ -355,6 +368,7 @@ export const AuthProvider = ({ children }) => {
             requestState,
             rescuestAccepted,
             getRequestsUser,
+            updateRequest,
             DeletePostulation,
 
             isAuthenticathed,

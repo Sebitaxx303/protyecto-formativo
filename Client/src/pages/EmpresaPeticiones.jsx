@@ -1,5 +1,6 @@
 import NavbarPeticiones from "../components/NavbarPeticiones"
 import { useAuth } from "../context/AuthContext"
+import { Link } from "react-router-dom"
 
 const EmpresaPeticiones = () => {
     const { getRequestsUser, DeletRequest } = useAuth()
@@ -8,46 +9,35 @@ const EmpresaPeticiones = () => {
     <>
         <NavbarPeticiones/>
         <div className="justify-content-center align-items-center" style={{width: "100%", height: "auto"}}>
-          <div className='container p-2 rounded-bottom-4  'style={{backgroundColor: '#5120d4', height: "auto"}}>
+          <div className='container p-2 rounded-bottom-4 'style={{backgroundColor: '#5120d4', height: "auto"}}>
+            <h1 className="text-light">Peticiones para talleres</h1>
+            <div className="d-flex justify-content-evenly flex-wrap p-4">
                 { getRequestsUser != null ?
                 getRequestsUser.map((request) => (
-                    <div className="container-fluid" key={request.id}>
-                        <div className=" mt-4 rounded-2 row bg-light text-center p-2">  
-                            <div className="col-2">
-                                <h5>ID</h5>
-                                <p>{request.id}</p>
-                            </div>
-                            <div className="col-1">
-                                <h5>Estado de peticion</h5>
-                                <p>{request.r_state}</p>
-                            </div>
-                            <div className="col-1">
-                                <h5>Tipo de peticion</h5>
-                                <p>{request.request_type}</p>
-                            </div>
-                            <div className="col-2">
-                                <h5>Fecha de publicacion</h5>
-                                <p>{request.start_date}</p>
-                            </div>
-                            <div className="col-2">
-                                <h5>Descripcion</h5>
-                                <p>{request.description}</p>
-                            </div>
-                            <div className="col-2">
-                                <button className="btn btn-primary">Editar</button>
-                            </div>
-                            <div className="col-2">
-                                <button onClick={() => DeletRequest(request.id)} className="btn btn-danger">Eliminar</button>
-                            </div>
+                    <div key={request.id} className="card mt-4" style={{width: "18rem"}}>
+                        <div className="card-header d-flex justify-content-between">
+                          <h3>{request.request_type}</h3>
+                          <h3>{request.id}</h3>
                         </div>
-                    </div>
-                
+                      <div className="card-body">
+                        <h5 className="card-title">{request.r_state}</h5>
+                        <h6>descripcion:</h6>
+                        <p className="card-text">{request.description}</p>
+                        <div className='d-grid gap-2 d-md-flex justify-content-md-end '>
+                        <button onClick={() => DeletRequest(request.id)} className="btn btn-danger">Eliminar</button>
+                        <Link to={`/empresa-peticiones/${request.id}`}>
+                                <button type='button' data-bs-toggle="modal" className="btn text-light btn-sm"  data-bs-target="#actualizacionM" style={{backgroundColor: '#1db0c0', width: ''}}>actualizar</button>
+                        </Link>
+                        </div>
+                        </div>
+                      </div>          
                 )):
                     <div>
                         <h1>no hay nada</h1>
                     </div>
             }
             </div>
+        </div>
         </div>
 
     </>
