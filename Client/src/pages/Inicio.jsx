@@ -171,12 +171,12 @@ const Inicio = () =>{
                   <img className="img-fluid" src="Images/servicios1.jpg" alt="" style={{borderRadius: '100%'}}/>
                 </div>
                 <div className="col-7 p-4 Servicios">
-                  <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, molestiae tenetur, nihil eos, id doloribus repudiandae consectetur cumque dicta praesentium rem sit temporibus voluptates suscipit saepe magnam tempora itaque distinctio!Lorem</span>
+                  <span><p style={{fontSize: 'large'}}>ofrecemos una plataforma para comunicacion de empresas y talleres del entorno de la textileria.</p></span>
                 </div>
               </div>
               <div className="row mt-3" style={{borderRadius: '5px'}}>
                 <div className=" col-7 p-3 Servicios">
-                  <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, molestiae tenetur, nihil eos, id doloribus repudiandae consectetur cumque dicta praesentium rem sit temporibus voluptates suscipit saepe magnam tempora itaque distinctio!Lorem Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi voluptatum obcaecati inventore dignissimos quibusdam repellat vero maiores aperiam perferendis, alias culpa ut a porro et. Repellendus perferendis similique facere atque!</span>
+                  <span><p style={{fontSize: 'large'}}>ofrecemos una plataforma para comunicacion de empresas y talleres del entorno de la textileria.</p></span>
                 </div>
                 <div className=" col-5 p-3">
                   <img className="img-fluid" src="Images/servicios2.jpg" alt="" style={{borderRadius: '100%'}}/>
@@ -187,7 +187,7 @@ const Inicio = () =>{
                   <img className="img-fluid" src="Images/servicios3.jpg" alt="" style={{borderRadius: '100%'}}/>
                 </div>
                 <div className="col-7 p-4 Servicios">
-                  <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, molestiae tenetur, nihil eos, id doloribus repudiandae consectetur cumque dicta praesentium rem sit temporibus voluptates suscipit saepe magnam tempora itaque distinctio!Lorem</span>
+                  <span><p style={{fontSize: 'large'}}>ofrecemos una plataforma para comunicacion de empresas y talleres del entorno de la textileria.</p></span>
                 </div>
               </div>
           </div>

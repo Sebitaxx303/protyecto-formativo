@@ -37,7 +37,7 @@ id_type int identity(1,1),
 machine_type varchar(30) primary key
 )
 go ----------------------------------------------
-insert into machine_types (machine_type) values ('medias'),('zapatos'),('jeans'),('camisas'),('busos')
+insert into machine_types (machine_type) values ('Máquina plana de una aguja'),('Máquina fileteadora'),('Máquina collarín'),('Máquina cerradora de codo'),('Máquina Flat Seamer'),('Máquina botonadora'),('Máquina ojaladora'),('Máquina presilladora'),('Máquina pretinadora'),('Máquina plana de dos agujas')
 go ----------------------------------------------
 create table machines(
 id_machine int primary key identity(1,1),
@@ -76,7 +76,7 @@ amount int,
 )
 go ----------------------------------------------
 create table d_requests_talleres (
-    id int identity (1,1) primary KEY,
+    id_d_r_t int identity (1,1) primary KEY,
     id_request int FOREIGN KEY REFERENCES requests,
     id_user int FOREIGN KEY REFERENCES users
 )

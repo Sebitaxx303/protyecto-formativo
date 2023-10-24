@@ -1,14 +1,21 @@
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext';
 
 
 const NavbarMaquinas = () => {
+ const navigate = useNavigate()
+const params = useParams()
   const { register, handleSubmit, formState:{errors} } = useForm();
-  const { AddMachine, errors: RegisterErrors } = useAuth();
+  const { AddMachine, UpdateMachine, errors: RegisterErrors } = useAuth();
   const onSubmited = handleSubmit( async (data) => {
     AddMachine(data);
     })
+
+    const submitUpdate = handleSubmit( async (data) => {
+      UpdateMachine(params.id_machine, data)
+    navigate('/taller-maquinas')
+    }) ;
   return (
   <>
       <nav className="navbar row navbar-expand-lg" style={{backgroundColor: '#12245f'}}>
@@ -47,16 +54,21 @@ const NavbarMaquinas = () => {
                                           </div>
                                       ))
                                     }
-                                      <form onSubmit={onSubmited}>    
+                                      <form>    
                                       
                                       <div className="mb-3">
                                           <label>Tipo de maquina</label>
                                           <select className="form-control" {...register("machine_type", {required: true})} placeholder="Ingrese su tipo de maquina">
-                                            <option>busos</option>
-                                            <option>camisas</option>
-                                            <option>jeans</option>
-                                            <option>medias</option>
-                                            <option>zapatos</option>
+                                            <option>Máquina botonadora</option>
+                                            <option>Máquina cerradora de codo</option>
+                                            <option>Máquina collarín</option>
+                                            <option>Máquina fileteadora</option>
+                                            <option>Máquina Flat Seamer</option>
+                                            <option>Máquina ojaladora</option>
+                                            <option>Máquina plana de dos agujas</option>
+                                            <option>Máquina plana de una aguja</option>
+                                            <option>Máquina presilladora</option>
+                                            <option>Máquina pretinadora</option>
                                           </select>
                                         </div>
                                           {
@@ -75,7 +87,7 @@ const NavbarMaquinas = () => {
                                           </div>  
                                             <div className='d-flex  gap-2  justify-content-center'>
                                             <div className="d-grid gap-2 d-md-block">   
-                                              <button type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
+                                              <button onClick={onSubmited} type="submit"  className="btn text-light" data-bs-dismiss="modal"aria-label="close"   style={{backgroundColor: '#C23373'}}>Registrar</button>
                                             </div>   
                                             <div className="d-grid gap-2 d-md-block">
                                               <button className="btn btn-danger"  data-bs-target="#primermodal" aria-label="close"  data-bs-toggle="modal"data-bs-dismiss="modal" >Volver</ button>
@@ -87,6 +99,63 @@ const NavbarMaquinas = () => {
                                 </div>
               </div> 
               {/*CIERRA MODAL DE REGSITRO DE TALLER*/} 
+                                          {/* MODAL DE ACTULAIZACION */}
+                                          <div className="modal fade" id="actualizacionM" tabIndex="-1"  aria-labelledby="exampleModalLabel"    aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered">
+                                  <div className="modal-content" style={{border: 'Solid'}}>
+                                    <div className="modal-header">
+                                      <h1 className="modal-title fs-5"  id="exampleModalLabel">Actualizacion de datos</h1>
+                                      <button type="button" className="btn-close"  data-bs-dismiss="modal" aria-label="Close"></ button>
+                                    </div>
+                                    <div className="modal-body">
+                                      {
+                                         RegisterErrors.map((error, i)=> (
+                                           <div className='bg-danger text-light rounded text-center' key={i}>
+                                             {error}
+                                             </div>
+                                         ))
+                                      }
+
+                                      {/* FORMULARIO DE ACTUALIZACION */}
+                                      <form  >
+                                        <div className="mb-3">
+                                          <label>Tipo de maquina</label>
+                                          <select className="form-control" {...register("machine_type", {required: true})} placeholder="Ingrese su tipo de maquina">
+                                          <option>Máquina botonadora</option>
+                                            <option>Máquina cerradora de codo</option>
+                                            <option>Máquina collarín</option>
+                                            <option>Máquina fileteadora</option>
+                                            <option>Máquina Flat Seamer</option>
+                                            <option>Máquina ojaladora</option>
+                                            <option>Máquina plana de dos agujas</option>
+                                            <option>Máquina plana de una aguja</option>
+                                            <option>Máquina presilladora</option>
+                                            <option>Máquina pretinadora</option>
+                                          </select>
+                                        </div>
+                                        <div className="mb-3">
+                                          <label htmlFor="" className="form-label">descripción</label>
+                                          <input type="text" className="form-control" {...register("mach_description", {required: false})} placeholder="Ingrese una descripcion de la maquina" autoComplete="off"/>
+                                        </div>        
+                                          {
+                                            errors.mach_description && <p className='text-danger'>la descripcion es obligatoria</p>
+                                          }
+                                          <div className="mb-3">
+                                            <label htmlFor="" className="form-label">Imagen</label>
+                                            <input type="file" className="form-control" {...register("no", {required: false})} autoComplete="off" placeholder="ingrese una imagen de la maquina"/>
+                                          </div>  
+                                          <button onClick={submitUpdate} type='submit' className='btn btn-primary' data-bs-dismiss="modal" aria-label="Close">actualizar </button>
+                                      </form>
+                                      {/* FORMULARIO DE ACTUALIZACION */}
+                                    </div>
+                                    <div className="modal-footer justify-content-center">
+                                      <div className="d-grid gap-2 d-md-block">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            {/* MODAL DE ACTULAIZACION */}
             </div>
       </nav>
   </>

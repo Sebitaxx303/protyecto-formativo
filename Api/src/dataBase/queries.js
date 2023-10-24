@@ -8,7 +8,7 @@ export const userQueries = {
     empresas: "SELECT * FROM users WHERE user_type = 'empresa'",
     update: 'UPDATE users SET manager_name = @manager_name, company_name = @company_name, rut = @rut, u_address = @u_address, phone_number = @phone_number, u_state = @u_state WHERE id = @id SELECT u_state FROM users  WHERE id = @id ',
     profile: 'SELECT id, manager_name, company_name, user_type, rut, u_address, phone_number, register_date, u_state  FROM users WHERE id = @id',
-    acceptRequest: "INSERT INTO d_requests_talleres (id_user, id_request ) VALUES (@id_user, @id_request)",
+    acceptRequest: "INSERT INTO d_requests_talleres (id_user, id_request ) VALUES (@id_user, @id_request) UPDATE requests SET r_state = 'inactiva' WHERE id = @id_request",
 }
 export const machinesQueries= {
     getmachines: 'SELECT * FROM machines WHERE id_user = @id_user',
@@ -24,5 +24,7 @@ export const requestsQueries = {
     getRequestsUserAcepted: 'SELECT * FROM d_requests_talleres DR  inner join requests R  ON R.id = DR.id_request inner join users U ON U.id = DR.id_user WHERE R.id_user_request = @id_user_request',
     getRequest:  'SELECT * FROM requests WHERE id_user = @id_user AND id = @id',
     updateRequest: 'UPDATE requests SET request_type = @request_type, description = @description, amount = @amount WHERE id_user_request = @id_user_request AND id = @id',
-    deleteRequest: 'DELETE FROM requests WHERE id_user_requestr = @id_user_request AND id = @id'
+    deleteRequest: 'DELETE FROM requests WHERE id_user_request = @id_user_request AND id = @id',
+    updateRequestState: 'UPDATE requests SET r_state = WHERE id = @id_request',
+    deletePostulation: 'DELETE FROM d_requests_talleres WHERE id_d_r_t = @id_d_r_t '
 }

@@ -103,3 +103,16 @@ export const deleteRequest = async (req,res) => {
         console.log(error)
     }
 }
+
+export const DeletePostulation = async (req,res) => {
+    const { id_d_r_t} = req.params
+    try {
+        const pool = await getConnection()
+        const results = await pool.request()
+        .input('id_d_r_t', sql.Int, id_d_r_t)
+        .query(requestsQueries.deletePostulation)
+        res.json(results.recordset)
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -45,3 +45,7 @@ export const GetRequestsUserAcceptedRequest = () => axios.get('/get-requests-use
 
 export const DeleteRequestRequest = (id) => axios.delete(`/delete-request/${id}`)
 
+export const DeletePostulationRequest = (id) => axios.delete(`/delete-postulation/${id}`)
+
+
+

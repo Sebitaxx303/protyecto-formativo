@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest, GetRequestsUserAcceptedRequest} from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest, GetRequestsUserAcceptedRequest, DeletePostulationRequest} from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -81,8 +81,8 @@ export const AuthProvider = ({ children }) => {
         
     }
 
-        //PETICION PARA ACEPTAR PETICIONES
-        const acceptRequest = async (id) =>{
+    //PETICION PARA ACEPTAR PETICIONES
+    const acceptRequest = async (id) =>{
             try {
                 if(userState)
                 {
@@ -99,7 +99,18 @@ export const AuthProvider = ({ children }) => {
             } catch (error) {
                 console.log((error))
             }
-        }
+    }
+
+    //PETICION PARA ELIMINAR POSTULACIONES
+    const DeletePostulation = async (id) => {
+            try {
+                await DeletePostulationRequest(id)
+                window.alert("postulacion rechazada")
+                window.location.reload()
+            } catch (error) {
+                console.log(error)
+            }
+    }
 
     //PETICION PARA AGREGAR MAQUINAS
     const AddMachine = async (machine) =>{
@@ -271,8 +282,8 @@ export const AuthProvider = ({ children }) => {
         try {
             if(requestState){            
             const getRequests = await GetRequestsUserAcceptedRequest()
-            console.log(getRequests.data)
             setRequestAccepted(getRequests.data)
+            console.log(getRequests)
             }
         } catch (error) {
           console.log(error)
@@ -344,6 +355,7 @@ export const AuthProvider = ({ children }) => {
             requestState,
             rescuestAccepted,
             getRequestsUser,
+            DeletePostulation,
 
             isAuthenticathed,
             errors,
