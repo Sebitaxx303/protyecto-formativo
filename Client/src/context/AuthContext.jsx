@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest} from "../api/auth";
+import { LoginRequest, LogoutRequest, RegisterRequest, VerifyTokenRequest, AddMachineRequest, GetMachineRequest, DeleteMachineRequest, GetUserRequest, UpdateRequest, GetUserTypeRequest, UpdateMachineRequest, GetAMachineRequest, AddRequestRequest, GetTalleresRequest, GetRequestsRequest, GetRequestsUserRequest, DeleteRequestRequest, AcceptRequestRequest, GetRequestsUserAcceptedRequest} from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContext = createContext();
@@ -17,6 +17,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [machine, setMachine] = useState(null)
+    const [rescuestAccepted, setRequestAccepted] = useState(null)
     const [requestState, setRequestState] = useState (true)
     const [userState, setUserState] = useState(true)
     const [getUser, setgetUser] = useState(null)
@@ -89,6 +90,7 @@ export const AuthProvider = ({ children }) => {
                     window.alert('peticion aceptada exitosamente')
                     window.location.reload()
                     setRequestState(false)
+                    console.log(requestState)
                 }
                 else{
                     console.log(userState)
@@ -212,18 +214,17 @@ export const AuthProvider = ({ children }) => {
     //EFFECT PARA OBTENER TODAS LAS PETICIONES
     useEffect(()=>{
         async function requests(){
-        try {
-            if(requestState){            
+        try {         
             const getRequests = await GetRequestsRequest()
             if(getRequests != null) {
             setGetRequests(getRequests.data)
-            }}
+            }
         } catch (error) {
           console.log(error)
         }
     }
     requests();
-        },[requestState])
+        },[])
 
     //EFFECT PARA OBTENER TODAS LAS PETICIONES POR USUARIO
     useEffect(()=>{
@@ -263,6 +264,22 @@ export const AuthProvider = ({ children }) => {
             return () => clearTimeout(timer)
         }
     }, [errors])
+
+    //EFFECT PARA TALLERES POSTULADOS
+    useEffect(()=>{
+        async function requestsAccepted(){
+        try {
+            if(requestState){            
+            const getRequests = await GetRequestsUserAcceptedRequest()
+            console.log(getRequests.data)
+            setRequestAccepted(getRequests.data)
+            }
+        } catch (error) {
+          console.log(error)
+        }
+    }
+    requestsAccepted();
+        },[requestState])
 
     //EFFECT PARA LA VALIDACION DEL USUARIO
     useEffect (() => {
@@ -325,6 +342,7 @@ export const AuthProvider = ({ children }) => {
             getRequests,
             DeletRequest,
             requestState,
+            rescuestAccepted,
             getRequestsUser,
 
             isAuthenticathed,

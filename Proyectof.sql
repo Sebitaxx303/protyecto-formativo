@@ -67,7 +67,7 @@ insert into request_availability (r_state) values ('Activa'),('Inactiva')
 go ----------------------------------------------
 create table requests(
 id int identity (1,1) primary key,
-id_user int foreign key references users,
+id_user_request int foreign key references users,
 request_type varchar(30) FOREIGN key REFERENCES request_types,
 start_date date not null,
 description nvarchar(500),

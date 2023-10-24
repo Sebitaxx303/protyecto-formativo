@@ -8,7 +8,7 @@ export const addRequest = async (req,res) => {
     try {
         const pool = await getConnection()
         const result = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .input('request_type', sql.VarChar, request_type)
         .input('description', sql.NVarChar, description)
         .input('amount', sql.Int, amount)
@@ -24,7 +24,7 @@ export const getRequests = async (req,res) => {
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .query(requestsQueries.getRequests)
         res.json(results.recordset)
     } catch (error) {
@@ -36,7 +36,7 @@ export const getRequestsUser = async (req,res) => {
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .query(requestsQueries.getRequestsUser)
         res.json(results.recordset)
     } catch (error) {
@@ -49,7 +49,7 @@ export const getRequestsUserAcepted = async (req,res) => {
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .query(requestsQueries.getRequestsUserAcepted)
         res.json(results.recordset)
     } catch (error) {
@@ -63,7 +63,7 @@ export const getRequest = async (req,res) => {
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .input('id', sql.Int, id)
         .query(requestsQueries.getRequest)
         res.json(results.recordset)
@@ -78,7 +78,7 @@ export const updateRequest = async (req,res) => {
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .input('id', sql.Int, id)
         .input('request_type', sql.VarChar, request_type)
         .input('description', sql.NVarChar, description)
@@ -95,7 +95,7 @@ export const deleteRequest = async (req,res) => {
     try {
         const pool = await getConnection()
         const results = await pool.request()
-        .input('id_user', sql.Int, id_user)
+        .input('id_user_request', sql.Int, id_user)
         .input('id', sql.Int, id)
         .query(requestsQueries.deleteRequest)
         res.json(results.recordset)
